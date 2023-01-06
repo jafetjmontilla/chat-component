@@ -1,8 +1,7 @@
-import React from "react";
+import { FC } from "react";
 import "../styles.css";
-export interface AppProps extends Partial<HTMLButtonElement> {
+export interface AppProps extends Partial<HTMLDivElement> {
     message: string;
-    onClick: React.MouseEventHandler<HTMLButtonElement>;
 }
-export declare const App: ({ message, onClick }: AppProps) => JSX.Element;
+export declare const App: FC<AppProps>;
 //# sourceMappingURL=App.d.ts.map
