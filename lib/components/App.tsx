@@ -21,8 +21,10 @@ export const App: FC<AppProps> = ({ message }) => {
     <>
       <DefaultLayout>
         <ComponenteRef ref={refDiv} message={message} setSize={setSize} />
-        <div className={`bg-green-500 sm:bg-gren-100 ${false && "flex !bg-blue-100"} w-[98%] h-[98%]`}>
-          {`${message} ${size?.contentWidth} * ${size?.contentHeight}`}
+        <div className={`@container bg-white`}>
+          <span className="bg-gray-100 absolute translate-y-[-50px]">
+            {`${message} ${size?.contentWidth} * ${size?.contentHeight}`}
+          </span>
           <ButtonBlue message="AQUI" onClick={() => { alert("algo") }} />
         </div>
       </DefaultLayout>
