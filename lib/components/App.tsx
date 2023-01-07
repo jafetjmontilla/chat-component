@@ -1,8 +1,9 @@
 import React, { FC, forwardRef, useContext, useEffect, useRef, useState } from "react";
-import "../styles.css";
-import { StateProvider } from "../context/chatContext";
-//import { AppContext } from '../context/appContext'
+import { StateContext, typeSet } from "../context/chatContext";
+import DefaultLayout from "../layouts/DefaultLayout";
 import { ButtonBlue } from "./ButtonBlue";
+import "../styles.css";
+
 
 export interface AppProps extends Partial<HTMLDivElement> {
   message: string
@@ -10,40 +11,43 @@ export interface AppProps extends Partial<HTMLDivElement> {
 
 export const App: FC<AppProps> = ({ message }) => {
   const refDiv = useRef<any>(null)
-  const [contentWidth, SetContentWidth] = useState<number | undefined>()
-  const [contentHeight, SetContentHeight] = useState<number | undefined>()
-  //const [isMounted, SetIsMounted] = useState<boolean>(false)
-
-  //  const [state]: any = useContext(ProductsContext)
+  const [size, setSize]: any = useState({})
 
   useEffect(() => {
-    if (refDiv.current) {
-      SetContentWidth(refDiv.current?.parentElement?.clientWidth)
-      SetContentHeight(refDiv.current?.parentElement?.clientHeight)
-    }
-  }, [refDiv.current])
-
-  useEffect(() => {
-    console.log(999, contentWidth, contentHeight)
-  }, [contentWidth, contentHeight])
+    if (1) console.log(1, size)
+  }, [size])
 
   return (
     <>
-      <StateProvider>
-        {/* <AppProvider> */}
-        <ComponenteReference ref={refDiv} width={contentWidth} height={contentHeight} />
-        <div className={`${false && "flex bg-blue-100"} w-[98%] h-[98%]`}>
-          {`${message} ${contentWidth} * ${contentHeight}`}
+      <DefaultLayout>
+        <ComponenteRef ref={refDiv} message={message} setSize={setSize} />
+        <div className={`bg-green-500 sm:bg-gren-100 ${false && "flex !bg-blue-100"} w-[98%] h-[98%]`}>
+          {`${message} ${size?.contentWidth} * ${size?.contentHeight}`}
           <ButtonBlue message="AQUI" onClick={() => { alert("algo") }} />
         </div>
-        {/* </AppProvider> */}
-      </StateProvider>
+      </DefaultLayout>
     </>
   );
 }
 
-const ComponenteReference: FC<any> = forwardRef(({ width, height }: any, ref: any) => {
+
+
+
+const ComponenteRef: FC<any> = forwardRef(({ setSize }: any, ref: any,) => {
+  const { contentWidth, contentHeight, dispatch } = useContext(StateContext);
+
+  useEffect(() => {
+    if (ref.current) {
+      dispatch({ set: typeSet.contentWidth, value: ref.current?.parentElement?.clientWidth })
+      dispatch({ set: typeSet.contentHeight, value: ref.current?.parentElement?.clientHeight })
+    }
+  }, [ref])
+
+  useEffect(() => {
+    setSize({ contentWidth, contentHeight })
+  }, [contentWidth, contentHeight])
+
   return (
-    <div ref={ref} />
+    <div ref={ref}></div>
   )
 })

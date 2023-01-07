@@ -11,8 +11,8 @@ interface StateContextProps extends StateProps {
 }
 
 const StateContextInitialValues: StateContextProps = {
-  contentWidth: 100,
-  contentHeight: 200,
+  contentWidth: 0,
+  contentHeight: 0,
   dispatch: () => { }
 }
 
@@ -29,15 +29,14 @@ interface typeDispatch {
 const StateContext = createContext(StateContextInitialValues);
 
 const StateProvider: FC = ({ children }): JSX.Element => {
-
-  const [props, dispatch] = useReducer<Reducer<StateProps, typeDispatch>>((state, action) => {
+  const [props, dispatch] = useReducer((state: StateProps, action: typeDispatch) => {
     if (action.set && action.value) {
       console.log(333, action.set)
       state = { ...state, [`${action.set}`]: action.value }
     }
     return state
-
   }, StateContextInitialValues);
+
   return (
     <StateContext.Provider value={{ ...props, dispatch }}>
       {children}
