@@ -1,47 +1,118 @@
-import React, { FC, forwardRef, useContext, useEffect, useRef, useState } from "react";
+import React, { Dispatch, FC, forwardRef, LegacyRef, RefObject, SetStateAction, useContext, useEffect, useRef, useState } from "react";
 import { StateContext, typeSet } from "../context/chatContext";
 import DefaultLayout from "../layouts/DefaultLayout";
 import { ButtonBlue } from "./ButtonBlue";
 import "../styles.css";
+import { Sections } from "./Sections";
+import { TopBar } from "./TopBar";
 
 
 export interface AppProps extends Partial<HTMLDivElement> {
   message: string
 }
 
+interface typeSizeContent {
+  contentWidth: number | undefined,
+  contentHeight: number | undefined,
+}
+
+export interface typeSize {
+  X: number | undefined,
+  Y: number | undefined,
+}
+
 export const App: FC<AppProps> = ({ message }) => {
-  const refDiv = useRef<any>(null)
-  const [size, setSize]: any = useState({})
+  const refDiv = useRef<RefObject<HTMLDivElement>>(null)
+  const refScroll = useRef<any>(null)
+  const [size, setSize] = useState<typeSizeContent>()
+
+
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const [status, setStatus] = useState<any>(0);
+  const [virtualKeyboard, setVirtualKeyboard] = useState<any>(false);
+  const handleScroll = () => {
+    const position = refScroll.current.scrollTop;
+    setScrollPosition(position);
+
+  };
+  const handleInnerHeight = () => {
+    setStatus(window.innerHeight)
+
+  };
 
   useEffect(() => {
-    if (1) console.log(1, size)
-  }, [size])
+    refScroll.current.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      refScroll?.current?.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener('resize', handleInnerHeight, { passive: true });
+    return () => {
+      window?.removeEventListener('resize', handleInnerHeight);
+    };
+  }, []);
+
+  useEffect(() => {
+    setTimeout(() => {
+      refScroll.current.scroll({
+        top: 10000,
+        behavior: "smooth"
+      });
+    }, 500);
+  }, [])
+
+  useEffect(() => {
+    setStatus(window.innerHeight)
+    console.log(45, navigator)
+
+  }, [window.innerHeight])
+
+  useEffect(() => {
+    if ('virtualKeyboard' in navigator) {
+      // The VirtualKeyboard API is supported!
+      setVirtualKeyboard(true)
+    }
+  }, [])
 
   return (
     <>
       <DefaultLayout>
-        <ComponenteRef ref={refDiv} message={message} setSize={setSize} />
-        <div className={`@container bg-white`}>
-          <span className="bg-gray-100 absolute translate-y-[-50px]">
-            {`${message} ${size?.contentWidth} * ${size?.contentHeight}`}
-          </span>
-          <ButtonBlue message="AQUI" onClick={() => { alert("algo") }} />
+        <ComponenteRef ref={refDiv} setSize={setSize} />
+        <span className="bg-red-300 p-1 rounded-lg absolute md:translate-y-[-50px]">
+          {`${message} ${size?.contentWidth} * ${size?.contentHeight}`}
+        </span>
+        <p className="absolute z-50 translate-x-32 translate-y-96">{`${scrollPosition} ${status} ${size?.contentHeight} ${virtualKeyboard}`}</p>
+        <div ref={refScroll} className={`@container flex flex-col bg-orange-500 md:bg-orange-500 overflow-auto sizeContainer${size?.contentWidth}`}>
+          <TopBar />
+          <Sections />
         </div>
       </DefaultLayout>
+      <style>{`
+      .sizeContainer${size?.contentWidth}{
+        width: ${size?.contentWidth}px;
+        height: ${size?.contentHeight}px;
+      }
+      `}</style>
     </>
   );
 }
 
 
+interface ComponenteRefProps extends Partial<HTMLDivElement> {
+  setSize: Dispatch<SetStateAction<typeSizeContent | undefined>>
+  ref: any
+}
 
-
-const ComponenteRef: FC<any> = forwardRef(({ setSize }: any, ref: any,) => {
+const ComponenteRef: FC<ComponenteRefProps> = forwardRef(({ setSize }, ref: any) => {
   const { contentWidth, contentHeight, dispatch } = useContext(StateContext);
 
   useEffect(() => {
     if (ref.current) {
       dispatch({ set: typeSet.contentWidth, value: ref.current?.parentElement?.clientWidth })
       dispatch({ set: typeSet.contentHeight, value: ref.current?.parentElement?.clientHeight })
+      dispatch({ set: typeSet.topBarSizeY, value: 28 })
     }
   }, [ref])
 

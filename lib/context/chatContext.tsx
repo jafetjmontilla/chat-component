@@ -2,8 +2,10 @@ import React, { createContext, Dispatch, FC, useReducer, Reducer } from "react";
 
 
 interface StateProps {
-  contentWidth: number | undefined
-  contentHeight: number | undefined
+  contentWidth: number
+  contentHeight: number
+  topBarSizeX: number
+  topBarSizeY: number
 }
 
 interface StateContextProps extends StateProps {
@@ -13,12 +15,16 @@ interface StateContextProps extends StateProps {
 const StateContextInitialValues: StateContextProps = {
   contentWidth: 0,
   contentHeight: 0,
+  topBarSizeX: 0,
+  topBarSizeY: 0,
   dispatch: () => { }
 }
 
 export enum typeSet {
   contentWidth = "contentWidth",
-  contentHeight = "contentHeight"
+  contentHeight = "contentHeight",
+  topBarSizeX = "topBarSizeX",
+  topBarSizeY = "topBarSizeY",
 }
 
 interface typeDispatch {
