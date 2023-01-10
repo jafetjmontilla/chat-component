@@ -1,5 +1,5 @@
 import React, { Dispatch, FC, forwardRef, LegacyRef, RefObject, SetStateAction, useContext, useEffect, useRef, useState } from "react";
-import { StateContext, typeSet } from "../context/chatContext";
+import { StateChatContext, typeSetChatContext } from "../context/ChatContext";
 import DefaultLayout from "../layouts/DefaultLayout";
 import { ButtonBlue } from "./ButtonBlue";
 import "../styles.css";
@@ -106,13 +106,13 @@ interface ComponenteRefProps extends Partial<HTMLDivElement> {
 }
 
 const ComponenteRef: FC<ComponenteRefProps> = forwardRef(({ setSize }, ref: any) => {
-  const { contentWidth, contentHeight, dispatch } = useContext(StateContext);
+  const { contentWidth, contentHeight, dispatch: chatConetxtDispatch } = useContext(StateChatContext);
 
   useEffect(() => {
     if (ref.current) {
-      dispatch({ set: typeSet.contentWidth, value: ref.current?.parentElement?.clientWidth })
-      dispatch({ set: typeSet.contentHeight, value: ref.current?.parentElement?.clientHeight })
-      dispatch({ set: typeSet.topBarSizeY, value: 28 })
+      chatConetxtDispatch({ set: typeSetChatContext.contentWidth, value: ref.current?.parentElement?.clientWidth })
+      chatConetxtDispatch({ set: typeSetChatContext.contentHeight, value: ref.current?.parentElement?.clientHeight })
+      chatConetxtDispatch({ set: typeSetChatContext.topBarSizeY, value: 28 })
     }
   }, [ref])
 

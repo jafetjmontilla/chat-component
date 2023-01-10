@@ -1,8 +1,8 @@
 import React, { FC, useContext, useEffect, useRef, useState } from "react";
-import { StateContext } from "../context/chatContext";
+import { StateChatContext } from "../context/ChatContext";
 
 export const SectionChatBox: FC = () => {
-  const { contentWidth, contentHeight, topBarSizeY } = useContext(StateContext);
+  const { contentWidth, contentHeight, topBarSizeY } = useContext(StateChatContext);
   return (
     <>
       <div className={`bg-gray-300 flex ${contentWidth < 769 && `sizeSections${contentWidth}`} md:!grow`}>

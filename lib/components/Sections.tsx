@@ -1,11 +1,11 @@
 import React, { FC, useContext, useEffect, useRef, useState } from "react";
-import { StateContext } from "../context/chatContext";
+import { StateChatContext } from "../context/ChatContext";
 import { SectionChatBox } from "./SectionChatBox";
 import { SectionChats } from "./SectionChats";
 import { SectionInfo } from "./SectionInfo";
 
 export const Sections: FC = () => {
-  const { contentWidth, contentHeight, topBarSizeY } = useContext(StateContext);
+  const { contentWidth, contentHeight, topBarSizeY } = useContext(StateChatContext);
   const [sectionInfoShow, setSectionInfoShow] = useState<boolean>(true)
 
   return (

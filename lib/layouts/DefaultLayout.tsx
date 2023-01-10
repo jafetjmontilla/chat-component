@@ -1,12 +1,15 @@
 import React, { FC } from "react";
-import { StateProvider } from "../context/chatContext";
+import { StateChatProvider } from "../context/ChatContext";
+import { StateSocketProvider } from "../context/SocketContext";
 
 const DefaultLayout: FC = ({ children }) => {
   return (
     <>
-      <StateProvider>
-        {children}
-      </StateProvider>
+      <StateSocketProvider>
+        <StateChatProvider>
+          {children}
+        </StateChatProvider>
+      </StateSocketProvider>
     </>
   );
 };

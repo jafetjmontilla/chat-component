@@ -1,5 +1,5 @@
 import React, { FC, useContext, useEffect, useRef, useState } from "react";
-import { StateContext, typeSet } from "../../context/chatContext";
+import { StateChatContext, typeSetChatContext } from "../../context/ChatContext";
 
 
 export interface ButtonBlueProps extends Partial<HTMLButtonElement> {
@@ -8,7 +8,7 @@ export interface ButtonBlueProps extends Partial<HTMLButtonElement> {
 }
 
 export const ButtonBlue: FC<ButtonBlueProps> = ({ message, onClick, className }) => {
-  // const { contentWidth, dispatch } = useContext(StateContext);
+  // const { contentWidth, dispatch } = useContext(StateChatContext);
 
   // useEffect(() => {
   //   dispatch({ set: typeSet.contentWidth, value: 1000 })

@@ -1,10 +1,10 @@
 import React, { FC, useContext, useEffect, useRef, useState } from "react";
-import { StateContext } from "../context/chatContext";
+import { StateChatContext } from "../context/ChatContext";
 
 
 
 export const TopBar: FC = () => {
-  const { contentWidth, topBarSizeY } = useContext(StateContext);
+  const { contentWidth, topBarSizeY } = useContext(StateChatContext);
 
   useEffect(() => {
     console.log(789, topBarSizeY)
