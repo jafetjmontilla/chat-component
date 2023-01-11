@@ -8,7 +8,7 @@ interface StateProps {
 }
 
 interface Context extends StateProps {
-  dispatch: Dispatch<typeDispatch>
+  dispatch: Dispatch<typeDispatchSocket>
 }
 
 const InitialValues: Context = {
@@ -22,7 +22,7 @@ export enum typeSetSocketContext {
   socketApp = "socketApp",
 }
 
-interface typeDispatch {
+export interface typeDispatchSocket {
   set: typeSetSocketContext
   value: any
 }
@@ -30,7 +30,7 @@ interface typeDispatch {
 const StateContext = createContext<Context>(InitialValues);
 
 const StateProvider: FC = ({ children }): JSX.Element => {
-  const [props, dispatch] = useReducer((state: StateProps, action: typeDispatch) => {
+  const [props, dispatch] = useReducer((state: StateProps, action: typeDispatchSocket) => {
     if (action.set && action.value) {
       state = { ...state, [`${action.set}`]: action.value }
     }

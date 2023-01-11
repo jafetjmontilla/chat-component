@@ -5,6 +5,7 @@ interface StateProps {
   contentHeight: number
   topBarSizeX: number
   topBarSizeY: number
+  SectionChatBoxX: number
 }
 
 interface Context extends StateProps {
@@ -16,6 +17,7 @@ const InitialValues: Context = {
   contentHeight: 0,
   topBarSizeX: 0,
   topBarSizeY: 0,
+  SectionChatBoxX: 0,
   dispatch: () => { }
 }
 
@@ -24,6 +26,7 @@ export enum typeSetChatContext {
   contentHeight = "contentHeight",
   topBarSizeX = "topBarSizeX",
   topBarSizeY = "topBarSizeY",
+  SectionChatBoxX = "SectionChatBoxX",
 }
 
 interface typeDispatch {

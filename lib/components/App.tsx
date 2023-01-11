@@ -1,5 +1,5 @@
 import React, { Dispatch, FC, forwardRef, LegacyRef, RefObject, SetStateAction, useContext, useEffect, useRef, useState } from "react";
-import { StateChatContext, typeSetChatContext } from "../context/ChatContext";
+import { StateChatContext, typeSetChatContext, StateSocketContext, typeSetSocketContext } from "../context";
 import DefaultLayout from "../layouts/DefaultLayout";
 import { ButtonBlue } from "./ButtonBlue";
 import "../styles.css";
@@ -9,6 +9,7 @@ import { TopBar } from "./TopBar";
 
 export interface AppProps extends Partial<HTMLDivElement> {
   message: string
+  token: string
 }
 
 interface typeSizeContent {
@@ -21,7 +22,7 @@ export interface typeSize {
   Y: number | undefined,
 }
 
-export const App: FC<AppProps> = ({ message }) => {
+export const App: FC<AppProps> = ({ message, token }) => {
   const refDiv = useRef<RefObject<HTMLDivElement>>(null)
   const refScroll = useRef<any>(null)
   const [size, setSize] = useState<typeSizeContent>()
@@ -79,7 +80,7 @@ export const App: FC<AppProps> = ({ message }) => {
   return (
     <>
       <DefaultLayout>
-        <ComponenteRef ref={refDiv} setSize={setSize} />
+        <ComponenteRef ref={refDiv} setSize={setSize} token={token} />
         <span className="bg-red-300 p-1 rounded-lg absolute md:translate-y-[-50px]">
           {`${message} ${size?.contentWidth} * ${size?.contentHeight}`}
         </span>
@@ -103,16 +104,18 @@ export const App: FC<AppProps> = ({ message }) => {
 interface ComponenteRefProps extends Partial<HTMLDivElement> {
   setSize: Dispatch<SetStateAction<typeSizeContent | undefined>>
   ref: any
+  token: string
 }
 
-const ComponenteRef: FC<ComponenteRefProps> = forwardRef(({ setSize }, ref: any) => {
-  const { contentWidth, contentHeight, dispatch: chatConetxtDispatch } = useContext(StateChatContext);
+const ComponenteRef: FC<ComponenteRefProps> = forwardRef(({ setSize, token }, ref: any) => {
+  const { contentWidth, contentHeight, dispatch: chatContextDispatch } = useContext(StateChatContext);
+  const { dispatch: socketContextDispach } = useContext(StateSocketContext);
 
   useEffect(() => {
     if (ref.current) {
-      chatConetxtDispatch({ set: typeSetChatContext.contentWidth, value: ref.current?.parentElement?.clientWidth })
-      chatConetxtDispatch({ set: typeSetChatContext.contentHeight, value: ref.current?.parentElement?.clientHeight })
-      chatConetxtDispatch({ set: typeSetChatContext.topBarSizeY, value: 28 })
+      chatContextDispatch({ set: typeSetChatContext.contentWidth, value: ref.current?.parentElement?.clientWidth })
+      chatContextDispatch({ set: typeSetChatContext.contentHeight, value: ref.current?.parentElement?.clientHeight })
+      chatContextDispatch({ set: typeSetChatContext.topBarSizeY, value: 28 })
     }
   }, [ref])
 

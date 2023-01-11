@@ -1,4 +1,4 @@
-import React, { FC, useContext, useEffect, useRef, useState } from "react";
+import React, { FC, useContext } from "react";
 import { StateChatContext } from "../context/ChatContext";
 
 export const SectionChats: FC = () => {

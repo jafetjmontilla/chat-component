@@ -2,6 +2,7 @@ import { FC } from "react";
 import "../styles.css";
 export interface AppProps extends Partial<HTMLDivElement> {
     message: string;
+    token: string;
 }
 export interface typeSize {
     X: number | undefined;
