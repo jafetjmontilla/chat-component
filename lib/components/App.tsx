@@ -66,8 +66,6 @@ export const App: FC<AppProps> = ({ message, token }) => {
 
   useEffect(() => {
     setStatus(window.innerHeight)
-    console.log(45, navigator)
-
   }, [window.innerHeight])
 
   useEffect(() => {
