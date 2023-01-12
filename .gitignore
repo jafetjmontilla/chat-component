@@ -2,3 +2,5 @@ node_modules
 yarn-error.log
 storybook-static
 dist
+dist/index.js
+*.map

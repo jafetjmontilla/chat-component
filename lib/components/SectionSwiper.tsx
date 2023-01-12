@@ -101,10 +101,6 @@ export const SectionSwiper: FC<sectionSwiperProps> = ({ sectionChatShow, setSect
             left: 0;
             top: 0;
           }
-          ::-webkit-scrollbar {
-            display: none;
-          }
-
         `}
       </style>
     </>
