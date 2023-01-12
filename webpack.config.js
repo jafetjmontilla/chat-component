@@ -22,8 +22,12 @@ module.exports = {
       //   exclude: [/\.stories.tsx/, /node_modules/],
       // },
       {
-        test: /\.css$/,
-        use: ["style-loader", "css-loader", "postcss-loader"],
+        test: /\.css$/i,
+        use: [
+          { loader: "style-loader" },
+          { loader: 'css-loader', options: { url: false } },
+          { loader: "postcss-loader" },
+        ],
       },
     ],
   },
