@@ -4,7 +4,11 @@ import { Conversation } from "./Conversation"
 import { HeaderChat } from "./HeaderChat";
 import { SendMessage } from "./SendMessage";
 
-export const SectionChatBox: FC = () => {
+interface sectionChatBoxProps {
+
+}
+
+export const SectionChatBox: FC<sectionChatBoxProps> = () => {
   const { contentWidth, contentHeight, topBarSizeY } = useContext(StateChatContext);
   return (
     <>

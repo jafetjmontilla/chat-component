@@ -1,4 +1,4 @@
-import React, { createContext, Dispatch, FC, useReducer, Reducer } from "react";
+import React, { createContext, Dispatch, FC, useReducer, Reducer, useEffect } from "react";
 
 interface StateProps {
   contentWidth: number
@@ -6,6 +6,7 @@ interface StateProps {
   topBarSizeX: number
   topBarSizeY: number
   SectionChatBoxX: number
+  SectionInfoShow: boolean
 }
 
 interface Context extends StateProps {
@@ -18,6 +19,7 @@ const InitialValues: Context = {
   topBarSizeX: 0,
   topBarSizeY: 0,
   SectionChatBoxX: 0,
+  SectionInfoShow: false,
   dispatch: () => { }
 }
 
@@ -27,6 +29,7 @@ export enum typeSetChatContext {
   topBarSizeX = "topBarSizeX",
   topBarSizeY = "topBarSizeY",
   SectionChatBoxX = "SectionChatBoxX",
+  SectionInfoShow = "SectionInfoShow"
 }
 
 interface typeDispatch {
@@ -34,15 +37,15 @@ interface typeDispatch {
   value: any
 }
 
-const StateContext = createContext(InitialValues);
+const StateContext = createContext<Context>(InitialValues);
 
 const StateProvider: FC = ({ children }): JSX.Element => {
   const [props, dispatch] = useReducer((state: StateProps, action: typeDispatch) => {
-    if (action.set && action.value) {
-      state = { ...state, [`${action.set}`]: action.value }
-    }
+    // if ((typeof action.set !== "undefined" || "null") && (typeof action.value !== "undefined" || "null")) {
+    state = { ...state, [`${action.set}`]: action.value }
+    // }
     return state
-  }, InitialValues);
+  }, InitialValues)
 
   return (
     <StateContext.Provider value={{ ...props, dispatch }}>

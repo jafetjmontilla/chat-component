@@ -6,12 +6,11 @@ import { SectionInfo } from "./SectionInfo";
 import { SectionSwiper } from "./SectionSwiper";
 
 export const Sections: FC = () => {
-  const { contentWidth, contentHeight, topBarSizeY, SectionChatBoxX, dispatch } = useContext(StateChatContext);
-  const [sectionInfoShow, setSectionInfoShow] = useState<boolean>(false)
+  const { contentWidth, contentHeight, topBarSizeY, SectionChatBoxX, SectionInfoShow, dispatch } = useContext(StateChatContext);
   const [sectionChatShow, setSectionChatShow] = useState<boolean>(false)
 
   useEffect(() => {
-    dispatch({ set: typeSetChatContext.SectionChatBoxX, value: contentWidth > 768 ? contentWidth - 280 - (sectionInfoShow ? 260 : 0) : contentWidth })
+    dispatch({ set: typeSetChatContext.SectionChatBoxX, value: contentWidth > 768 ? contentWidth - 280 - (SectionInfoShow ? 260 : 0) : contentWidth })
   }, [contentWidth])
 
 
@@ -20,17 +19,17 @@ export const Sections: FC = () => {
       <div className={`bg-red-500 flex sizeSections${contentWidth}`}>
         {/* <SectionChats /> */}
         {contentWidth < 769 &&
-          !sectionChatShow && !sectionInfoShow && <SectionSwiper sectionChatShow={sectionChatShow} setSectionChatShow={setSectionChatShow} />
+          !sectionChatShow && !SectionInfoShow && <SectionSwiper sectionChatShow={sectionChatShow} setSectionChatShow={setSectionChatShow} />
         }
         {contentWidth < 769 &&
-          sectionInfoShow && <SectionInfo />
+          SectionInfoShow && <SectionInfo />
         }
         {contentWidth < 769 &&
           sectionChatShow && <SectionChatBox />
         }
         {contentWidth > 768 && <SectionChats />}
         {contentWidth > 768 && <SectionChatBox />}
-        {contentWidth > 768 && sectionInfoShow && <SectionInfo />}
+        {contentWidth > 768 && SectionInfoShow && <SectionInfo />}
       </div>
       <style>{`
       .sizeSections${contentWidth}{
