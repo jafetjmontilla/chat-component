@@ -1,5 +1,5 @@
 import React, { FC, useContext, useEffect, useState } from "react";
-import { StateChatContext } from "../context/ChatContext";
+import { StateChatContext, typeSetChatContext } from "../context/ChatContext";
 import { SectionChats } from "./SectionChats";
 import { Swiper, SwiperSlide, useSwiper } from 'swiper/react';
 import { Scrollbar, Navigation, Pagination, Swiper as SwiperRef } from "swiper";
@@ -34,21 +34,41 @@ interface sectionSwiperProps {
   // active: boolean
   // setActive: any
   // setChat: any
-  sectionChatShow: boolean
-  setSectionChatShow: any
+
 }
-export const SectionSwiper: FC<sectionSwiperProps> = ({ sectionChatShow, setSectionChatShow }) => {
-  const { contentWidth, contentHeight, topBarSizeY } = useContext(StateChatContext);
+export const SectionSwiper: FC<sectionSwiperProps> = () => {
+  const { contentWidth, contentHeight, topBarSizeY, SectionChatShow, SectionChatBoxX, SectionInfoX, dispatch } = useContext(StateChatContext);
   const [page, setPage] = useState(0)
   const [chatId, setChatId] = useState(null)
   const [contactUid, setContactUid] = useState(null)
 
-
+  const handleChatShow = () => {
+    dispatch({ set: typeSetChatContext.SectionChatShow, value: true })
+  }
   const className = "block bg-primary text-white w-1/3 text-sm transition hover:opacity-90"
+
+  const transitionSizeMax1 = {
+    transition: `width 0.2s`,
+    width: `${SectionChatBoxX}px`
+  }
+  const transitionSizeMin1 = {
+    transition: "width 0.2s",
+    width: `${SectionChatBoxX - SectionInfoX}px`,
+  }
+  const transitionLeftOpen1 = {
+    transition: `left 0.2s`,
+    left: `0%`
+  }
+  const transitionLeftClose1 = {
+    transition: "width 2s",
+    width: `-50%`,
+  }
 
   return (
     <>
-      <div className={`bg-blue-100 flex flex-col sizeSections${contentWidth} @md:!w-[280px]`}>
+      <div style={contentWidth < 769 ?
+        SectionChatShow ? transitionLeftClose1 : {}
+        : {}} className={`bg-blue-100 relative flex flex-col sizeSections${contentWidth} @md:!w-[280px]`}>
         <div className="flex h-[5%]">
           <Button className={className} onClick={() => { setPage(0) }} title="Chats" />
           <Button className={className} onClick={() => { setPage(1) }} title="Contactos" />
@@ -66,7 +86,7 @@ export const SectionSwiper: FC<sectionSwiperProps> = ({ sectionChatShow, setSect
           <SlideTo page={page} setPage={setPage} />
           <SwiperSlide className="bg-green-100 pb-3 overscroll-contain" onScroll={() => { }}>
             <div>
-              <button onClick={() => { setSectionChatShow(true) }}>ir a chat</button>
+              <button onClick={handleChatShow}>ir a chat</button>
               0
             </div>
           </SwiperSlide>

@@ -20,9 +20,10 @@ export const Conversation = ({ chat, user }: any) => {
 
 
     return (
-        <div className="bg-gray-100 flex flex-col w-full h-full overflow-y-scroll">
-            algo
-            {/* {chat?.messages?.map((elem: any, idx: number) => {
+        <>
+            <div className="bg-gray-100 flex flex-col w-full h-full overflow-y-scroll">
+                algo1
+                {/* {chat?.messages?.map((elem: any, idx: number) => {
                 return (
                     <ItemMessage key={idx} type={elem.type} emisor={user.uid == elem.emitUserUid} message={elem.message} date={getHour(elem.createdAt)} />
                 )
@@ -31,22 +32,28 @@ export const Conversation = ({ chat, user }: any) => {
                 <span id="final"></span>
             </div> */}
 
-            <ItemMessage type="text" emisor={false} message={"hola  ---. 10:45 pm"} date={"10:45 pm"} />
-            <ItemMessage type="text" emisor={false} message={"como estas"} date={"10:45 pm"} />
-            <ItemMessage type="text" emisor={true} message={"esto es un link https://tutorial.eyehunts.com/html/html-p-tag-paragraph-break-font-size-line-space-indent/#:~:text=The%20width%20property%20sets%20the,break%20to%20the%20next%20line."} date={"10:45 pm"} />
-            <ItemMessage type="text" emisor={false} message={"esto es otro link https://tailwindcss.com/docs/display#block-and-inline para revisar si salta la linea"} date={"10:45 pm"} />
-            <ItemMessage type="text" emisor={false} message={"hola mundo, en este sólo hay palabras nada mas que letras en un párrafo"} date={"10:45 pm"} />
-            <ItemMessage type="text" emisor={false} message={"1111111111111111111111111111111111111111111111111111112222222222222222222222222222222222222222222222222222222222222222222222222223333333333333333333333333333333333333333333334"} date={"10:45 pm"} />
-            <ItemMessage type="text" emisor={true} message={"hola mundo"} date={"10:45 pm"} />
-            <ItemMessage type="file" emisor={false} message={"hola mundo"} date={"10:45 pm"} />
-            <ItemMessage type="text" emisor={true} message={"hola mundo"} date={"10:45 pm"} />
-            <ItemMessage type="file" emisor={false} message={"hola mundo"} date={"10:45 pm"} />
-            <ItemMessage type="text" emisor={true} message={"hola mundo"} date={"10:45 pm"} />
-            <ItemMessage type="file" emisor={false} message={"hola mundo"} date={"10:45 pm"} />
-            <ItemMessage type="text" emisor={true} message={"hola mundo"} date={"10:45 pm"} />
-            <ItemMessage type="file" emisor={false} message={"hola mundo"} date={"10:45 pm"} />
-            <ItemMessage type="text" emisor={true} message={"hola mundo"} date={"10:45 pm"} />
-        </div>
+                <ItemMessage type="text" emisor={false} message={"hola  ---. 10:45 pm"} date={"10:45 pm"} />
+                <ItemMessage type="text" emisor={false} message={"como estas"} date={"10:45 pm"} />
+                <ItemMessage type="text" emisor={true} message={"esto es un link https://tutorial.eyehunts.com/html/html-p-tag-paragraph-break-font-size-line-space-indent/#:~:text=The%20width%20property%20sets%20the,break%20to%20the%20next%20line."} date={"10:45 pm"} />
+                <ItemMessage type="text" emisor={false} message={"esto es otro link https://tailwindcss.com/docs/display#block-and-inline para revisar si salta la linea"} date={"10:45 pm"} />
+                <ItemMessage type="text" emisor={false} message={"hola mundo, en este sólo hay palabras nada mas que letras en un párrafo"} date={"10:45 pm"} />
+                <ItemMessage type="text" emisor={false} message={"1111111111111111111111111111111111111111111111111111112222222222222222222222222222222222222222222222222222222222222222222222222223333333333333333333333333333333333333333333334"} date={"10:45 pm"} />
+                <ItemMessage type="text" emisor={true} message={"hola mundo"} date={"10:45 pm"} />
+                <ItemMessage type="file" emisor={false} message={"hola mundo"} date={"10:45 pm"} />
+                <ItemMessage type="text" emisor={true} message={"hola mundo"} date={"10:45 pm"} />
+                <ItemMessage type="file" emisor={false} message={"hola mundo"} date={"10:45 pm"} />
+                <ItemMessage type="text" emisor={true} message={"hola mundo"} date={"10:45 pm"} />
+                <ItemMessage type="file" emisor={false} message={"hola mundo"} date={"10:45 pm"} />
+                <ItemMessage type="text" emisor={true} message={"hola mundo"} date={"10:45 pm"} />
+                <ItemMessage type="file" emisor={false} message={"hola mundo"} date={"10:45 pm"} />
+                <ItemMessage type="text" emisor={true} message={"hola mundo"} date={"10:45 pm"} />
+            </div>
+            {/* <style>{`
+      ::-webkit-scrollbar {
+            display: block;
+          }
+      ` }</style> */}
+        </>
     )
 }
 

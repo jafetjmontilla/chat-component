@@ -83,12 +83,13 @@ export const App: FC<AppProps> = ({ message, token }) => {
           {`${message} ${size?.contentWidth} * ${size?.contentHeight}`}
         </span>
         <p className="absolute z-50 translate-x-32 translate-y-96">{`${scrollPosition} ${status} ${size?.contentHeight} ${virtualKeyboard}`}</p>
-        <div ref={refScroll} className={`@container flex flex-col bg-orange-500 md:bg-orange-500 overflow-auto sizeContainer${size?.contentWidth}`}>
+        <div ref={refScroll} className={`@container flex flex-col bg-orange-500 md:bg-orange-500 sizeContainer${size?.contentWidth}`}>
           <TopBar />
           <Sections />
         </div>
       </DefaultLayout>
       <style>{`
+      
       .sizeContainer${size?.contentWidth}{
         width: ${size?.contentWidth}px;
         height: ${size?.contentHeight}px;

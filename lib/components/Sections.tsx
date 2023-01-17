@@ -6,12 +6,35 @@ import { SectionInfo } from "./SectionInfo";
 import { SectionSwiper } from "./SectionSwiper";
 
 export const Sections: FC = () => {
-  const { contentWidth, contentHeight, topBarSizeY, SectionChatBoxX, SectionInfoShow, dispatch } = useContext(StateChatContext);
-  const [sectionChatShow, setSectionChatShow] = useState<boolean>(false)
+  const { contentWidth, contentHeight, topBarSizeY, SectionChatBoxX, SectionInfoShow, SectionChatShow, dispatch } = useContext(StateChatContext);
+  const [valirOpenInfo, setValirOpenInfo] = useState<boolean>(false)
+  const [valirChatShow, setValirChatShow] = useState<boolean>(false)
 
   useEffect(() => {
-    dispatch({ set: typeSetChatContext.SectionChatBoxX, value: contentWidth > 768 ? contentWidth - 280 - (SectionInfoShow ? 260 : 0) : contentWidth })
+    dispatch({ set: typeSetChatContext.SectionChatBoxX, value: contentWidth > 768 ? contentWidth - 280 : contentWidth })
   }, [contentWidth])
+
+  useEffect(() => {
+    if (SectionInfoShow) {
+      console.log(0, SectionInfoShow)
+      setTimeout(() => {
+        setValirOpenInfo(true)
+      }, 200);
+    } else {
+      console.log(1, SectionInfoShow)
+      setValirOpenInfo(false)
+    }
+  }, [SectionInfoShow])
+
+  useEffect(() => {
+    if (SectionChatShow) {
+      setValirChatShow(true)
+    } else {
+      setTimeout(() => {
+        setValirChatShow(false)
+      }, 2000);
+    }
+  }, [SectionChatShow])
 
 
   return (
@@ -19,17 +42,17 @@ export const Sections: FC = () => {
       <div className={`bg-red-500 flex sizeSections${contentWidth}`}>
         {/* <SectionChats /> */}
         {contentWidth < 769 &&
-          !sectionChatShow && !SectionInfoShow && <SectionSwiper sectionChatShow={sectionChatShow} setSectionChatShow={setSectionChatShow} />
+          !SectionInfoShow && <SectionSwiper />
         }
         {contentWidth < 769 &&
           SectionInfoShow && <SectionInfo />
         }
         {contentWidth < 769 &&
-          sectionChatShow && <SectionChatBox />
+          valirChatShow && <SectionChatBox />
         }
         {contentWidth > 768 && <SectionChats />}
         {contentWidth > 768 && <SectionChatBox />}
-        {contentWidth > 768 && SectionInfoShow && <SectionInfo />}
+        {contentWidth > 768 && SectionInfoShow && valirOpenInfo && <SectionInfo />}
       </div>
       <style>{`
       .sizeSections${contentWidth}{
@@ -37,8 +60,8 @@ export const Sections: FC = () => {
         height: ${contentHeight - topBarSizeY}px;
       }
       .sizeSectionChatBox${contentWidth}{
-        width: ${SectionChatBoxX}px;
-      }
+        width: ${SectionChatBoxX}px !important;
+      }      
       `}</style>
     </>
   );

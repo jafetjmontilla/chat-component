@@ -6,7 +6,10 @@ interface StateProps {
   topBarSizeX: number
   topBarSizeY: number
   SectionChatBoxX: number
+  SectionChatShow: boolean
+  SectionInfoX: number
   SectionInfoShow: boolean
+
 }
 
 interface Context extends StateProps {
@@ -19,6 +22,8 @@ const InitialValues: Context = {
   topBarSizeX: 0,
   topBarSizeY: 0,
   SectionChatBoxX: 0,
+  SectionChatShow: false,
+  SectionInfoX: 260,
   SectionInfoShow: false,
   dispatch: () => { }
 }
@@ -29,6 +34,8 @@ export enum typeSetChatContext {
   topBarSizeX = "topBarSizeX",
   topBarSizeY = "topBarSizeY",
   SectionChatBoxX = "SectionChatBoxX",
+  SectionChatShow = "SectionChatShow",
+  SectionInfoX = "SectionInfoX",
   SectionInfoShow = "SectionInfoShow"
 }
 
