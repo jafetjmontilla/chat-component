@@ -5,6 +5,9 @@ import { Scrollbar, Pagination, Swiper as SwiperRef } from "swiper";
 import { Button } from "./Button";
 import 'swiper/css';
 import "swiper/css/bundle";
+import { SectionChats } from "./SectionChats";
+import { SectionContacs } from "./SectionContacts";
+import { SectionEvents } from "./SectionEvents";
 
 interface slidetoProps {
   page: number
@@ -70,18 +73,18 @@ export const SectionSwiper: FC<sectionSwiperProps> = () => {
           <SlideTo page={page} setPage={setPage} />
           <SwiperSlide className="bg-green-100 pb-3 overscroll-contain" onScroll={() => { }}>
             <div>
-              <button onClick={handleChatShow}>ir a chat</button>
-              0
+              {contentWidth < 769 && <button onClick={handleChatShow}>ir a chat</button>}
+              <SectionChats />
             </div>
           </SwiperSlide>
           <SwiperSlide className="bg-green-300 pb-3 overscroll-contain">
             <div>
-              1
+              <SectionContacs />
             </div>
           </SwiperSlide>
           <SwiperSlide className="bg-green-600 pb-3 overscroll-contain">
             <div>
-              2
+              <SectionEvents />
             </div>
           </SwiperSlide>
         </Swiper>

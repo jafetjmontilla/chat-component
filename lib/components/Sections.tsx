@@ -46,7 +46,7 @@ export const Sections: FC = () => {
         {contentWidth < 769 &&
           valirChatShow && <SectionChatBox />
         }
-        {contentWidth > 768 && <SectionChats />}
+        {contentWidth > 768 && <SectionSwiper />}
         {contentWidth > 768 && <SectionChatBox />}
         {contentWidth > 768 && SectionInfoShow && valirOpenInfo && <SectionInfo />}
       </div>

@@ -1,7 +1,7 @@
 import React, { FC, useContext } from "react";
 import { StateChatContext } from "../context/ChatContext";
 
-export const SectionChats: FC = () => {
+export const SectionContacs: FC = () => {
   const { contentWidth, contentHeight, topBarSizeY } = useContext(StateChatContext);
   return (
     <>
