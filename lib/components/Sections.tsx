@@ -16,12 +16,10 @@ export const Sections: FC = () => {
 
   useEffect(() => {
     if (SectionInfoShow) {
-      console.log(0, SectionInfoShow)
       setTimeout(() => {
         setValirOpenInfo(true)
       }, 200);
     } else {
-      console.log(1, SectionInfoShow)
       setValirOpenInfo(false)
     }
   }, [SectionInfoShow])
@@ -32,15 +30,13 @@ export const Sections: FC = () => {
     } else {
       setTimeout(() => {
         setValirChatShow(false)
-      }, 2000);
+      }, 200);
     }
   }, [SectionChatShow])
-
 
   return (
     <>
       <div className={`bg-red-500 flex sizeSections${contentWidth}`}>
-        {/* <SectionChats /> */}
         {contentWidth < 769 &&
           !SectionInfoShow && <SectionSwiper />
         }

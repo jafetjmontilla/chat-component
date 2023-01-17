@@ -1,12 +1,10 @@
 import React, { FC, useContext, useEffect, useState } from "react";
 import { StateChatContext, typeSetChatContext } from "../context/ChatContext";
-import { SectionChats } from "./SectionChats";
 import { Swiper, SwiperSlide, useSwiper } from 'swiper/react';
-import { Scrollbar, Navigation, Pagination, Swiper as SwiperRef } from "swiper";
+import { Scrollbar, Pagination, Swiper as SwiperRef } from "swiper";
 import { Button } from "./Button";
 import 'swiper/css';
 import "swiper/css/bundle";
-
 
 interface slidetoProps {
   page: number
@@ -19,7 +17,6 @@ const SlideTo: FC<slidetoProps> = ({ page, setPage }) => {
   const swiper: swiperProps = useSwiper();
   swiper.on('slideChange', function (idx: any) {
     setPage(idx.activeIndex)
-    // setResultsContact(contacts?.results)
   });
   useEffect(() => {
     if (swiper.enabled) {
@@ -31,13 +28,9 @@ const SlideTo: FC<slidetoProps> = ({ page, setPage }) => {
 
 //-------------------------------------------------------------------------------------------------------
 interface sectionSwiperProps {
-  // active: boolean
-  // setActive: any
-  // setChat: any
-
 }
 export const SectionSwiper: FC<sectionSwiperProps> = () => {
-  const { contentWidth, contentHeight, topBarSizeY, SectionChatShow, SectionChatBoxX, SectionInfoX, dispatch } = useContext(StateChatContext);
+  const { contentWidth, SectionChatShow, dispatch } = useContext(StateChatContext);
   const [page, setPage] = useState(0)
   const [chatId, setChatId] = useState(null)
   const [contactUid, setContactUid] = useState(null)
@@ -45,37 +38,28 @@ export const SectionSwiper: FC<sectionSwiperProps> = () => {
   const handleChatShow = () => {
     dispatch({ set: typeSetChatContext.SectionChatShow, value: true })
   }
-  const className = "block bg-primary text-white w-1/3 text-sm transition hover:opacity-90"
+  const classNameButton = "block bg-primary text-white w-1/3 text-sm transition hover:opacity-90"
 
-  const transitionSizeMax1 = {
-    transition: `width 0.2s`,
-    width: `${SectionChatBoxX}px`
+  const transitionLeftclose = {
+    transition: `left 0.8s 0.1s`,
+    left: `-100%`
   }
-  const transitionSizeMin1 = {
-    transition: "width 0.2s",
-    width: `${SectionChatBoxX - SectionInfoX}px`,
-  }
-  const transitionLeftOpen1 = {
-    transition: `left 0.2s`,
-    left: `0%`
-  }
-  const transitionLeftClose1 = {
-    transition: "width 2s",
-    width: `-50%`,
+  const transitionLeftOpen = {
+    transition: "left 0.2s",
+    left: `0%`,
   }
 
   return (
     <>
       <div style={contentWidth < 769 ?
-        SectionChatShow ? transitionLeftClose1 : {}
+        SectionChatShow ? transitionLeftclose : transitionLeftOpen
         : {}} className={`bg-blue-100 relative flex flex-col sizeSections${contentWidth} @md:!w-[280px]`}>
         <div className="flex h-[5%]">
-          <Button className={className} onClick={() => { setPage(0) }} title="Chats" />
-          <Button className={className} onClick={() => { setPage(1) }} title="Contactos" />
-          <Button className={className} onClick={() => { setPage(2) }} title="Eventos" />
+          <Button className={classNameButton} onClick={() => { setPage(0) }} title="Chats" />
+          <Button className={classNameButton} onClick={() => { setPage(1) }} title="Contactos" />
+          <Button className={classNameButton} onClick={() => { setPage(2) }} title="Eventos" />
         </div>
         <Swiper key={1} className="bg-blue-900 w-[100%] h-[95%]"
-          // pagination={{ dynamicBullets: true, type: 'bullets', clickable: true }}
           preloadImages={false}
           lazy={true}
           scrollbar={{
