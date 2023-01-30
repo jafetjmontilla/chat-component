@@ -6,10 +6,14 @@ module.exports = {
   prefix: 'asd-',
   darkMode: false, // or 'media' or 'class'
   theme: {
-
-  },
-  variants: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: `var(--color-primary)`,
+        secondary: `var(--color-secondary)`,
+        tertiary: `var(--color-tertiary)`,
+        "color-base": `var(--color-base)`,
+      },
+    },
   },
   plugins: [
     require('@tailwindcss/container-queries'),

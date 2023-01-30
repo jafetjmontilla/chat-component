@@ -5,7 +5,7 @@ export interface AppProps extends Partial<HTMLDivElement> {
   notifications: Notification[]
   contacts: Contact[]
   chats: Chat[]
-  events: Event[]
+  portals: Portal[]
 }
 export interface ThemeChat {
   primaryColor: string
@@ -23,12 +23,12 @@ export interface Notification {
 export interface Contact {
   _id: string
   uid: string
-  type: string
+  type: string //no usado hasta el momento
   onLine: onLine
   nickName: string
   photoURL: string
   correo: string
-  eventos: Event[]
+  portals: Portal[]
 }
 export interface Chat {
   _id: string
@@ -42,8 +42,14 @@ export interface Chat {
   photoURL: string
 }
 export interface Event {
-  _id: string,
+  _id: string
   nombre: string
+}
+export interface Portal {
+  _id: string
+  title: string
+  url: string
+  photoURL: string
 }
 export interface onLine {
   status: Boolean
