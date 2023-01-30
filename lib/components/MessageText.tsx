@@ -8,14 +8,14 @@ interface propsMesageTetx {
 
 export const MessageText: FC<propsMesageTetx> = ({ message, date, emisor }) => (
   <>
-    <div className="grid pb-1">
+    <div className="asd-grid asd-pb-1">
       {/* <div className="@md:max-w-lg"> */}
-      <p className={`${emisor ? "text-black " : "text-black "} break-all pl-2 pt-1 pr-2 text-xs @md:text-sm`}>
+      <p className={`${emisor ? "asd-text-black " : "asd-text-black "} asd-break-all asd-pl-2 asd-pt-1 asd-pr-2 asd-text-xs @md:asd-text-sm`}>
         {message}
       </p>
       {/* </div> */}
       {/* <div className=" "> */}
-      <p className={`${emisor ? "pr-6" : "pr-2"} text-right text-gray-500 text-xs pl-12 w-22 h-4`}>
+      <p className={`${emisor ? "asd-pr-6" : "asd-pr-2"} asd-text-right asd-text-gray-500 asd-text-xs asd-pl-12 asd-w-22 asd-h-4`}>
         {date}
       </p>
       {/* </div> */}

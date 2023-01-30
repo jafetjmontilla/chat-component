@@ -1,4 +1,4 @@
-import React, { createContext, Dispatch, FC, useReducer, Reducer, useEffect } from "react";
+import React, { createContext, Dispatch, FC, useReducer, Reducer, useEffect, HtmlHTMLAttributes, ReactNode } from "react";
 
 interface StateProps {
   contentWidth: number
@@ -9,6 +9,7 @@ interface StateProps {
   SectionChatShow: boolean
   SectionInfoX: number
   SectionInfoShow: boolean
+  activeSearch: boolean
 
 }
 
@@ -25,6 +26,7 @@ const InitialValues: Context = {
   SectionChatShow: false,
   SectionInfoX: 260,
   SectionInfoShow: false,
+  activeSearch: false,
   dispatch: () => { }
 }
 
@@ -36,7 +38,8 @@ export enum typeSetChatContext {
   SectionChatBoxX = "SectionChatBoxX",
   SectionChatShow = "SectionChatShow",
   SectionInfoX = "SectionInfoX",
-  SectionInfoShow = "SectionInfoShow"
+  SectionInfoShow = "SectionInfoShow",
+  activeSearch = "activeSearch"
 }
 
 interface typeDispatch {
@@ -46,7 +49,7 @@ interface typeDispatch {
 
 const StateContext = createContext<Context>(InitialValues);
 
-const StateProvider: FC = ({ children }): JSX.Element => {
+const StateProvider: FC<{ children: ReactNode }> = ({ children }): JSX.Element => {
   const [props, dispatch] = useReducer((state: StateProps, action: typeDispatch) => {
     // if ((typeof action.set !== "undefined" || "null") && (typeof action.value !== "undefined" || "null")) {
     state = { ...state, [`${action.set}`]: action.value }

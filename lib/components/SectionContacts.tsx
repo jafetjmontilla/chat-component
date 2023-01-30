@@ -5,7 +5,7 @@ export const SectionContacs: FC = () => {
   const { contentWidth, contentHeight, topBarSizeY } = useContext(StateChatContext);
   return (
     <>
-      <div className={`bg-white flex sizeSections${contentWidth} @md:!w-[280px]`}>
+      <div className={`asd-bg-white asd-flex asd-sizeSections${contentWidth} @md:!asd-w-[280px]`}>
         CONTACTS
       </div>
       {/* <style>{`

@@ -8,7 +8,7 @@ interface sectionChatBoxProps {
 }
 
 export const SectionChatBox: FC<sectionChatBoxProps> = () => {
-  const { contentWidth, SectionChatShow, SectionInfoShow, SectionInfoX, SectionChatBoxX } = useContext(StateChatContext);
+  const { contentWidth, SectionChatShow, SectionInfoShow, SectionInfoX, SectionChatBoxX, topBarSizeY } = useContext(StateChatContext);
   const divRef = useRef<any>()
   const [show, setShow] = useState(false)
 
@@ -27,10 +27,12 @@ export const SectionChatBox: FC<sectionChatBoxProps> = () => {
     width: `${SectionChatBoxX - SectionInfoX}px`,
   }
   const transitionRightOpen = {
+    transform: `translateY(-${topBarSizeY}px)`,
     transition: `left 0.4s`,
     left: `0%`
   }
   const transitionRightClose = {
+    transform: `translateY(-${topBarSizeY}px)`,
     transition: "left 0.3s",
     left: `100%`,
   }
@@ -40,8 +42,8 @@ export const SectionChatBox: FC<sectionChatBoxProps> = () => {
       <div ref={divRef} style={
         !SectionInfoShow ?
           contentWidth > 768 ? transitionSizeMax : SectionChatShow && show ? transitionRightOpen : transitionRightClose
-          : contentWidth > 768 ? transitionSizeMin : {}
-      } className={`${contentWidth > 768 ? "relative" : `absolute z-10 sizeSections${contentWidth}`} bg-gray-300 flex flex-col`}>
+          : contentWidth > 768 ? transitionSizeMin : {transform: `translateY(-${topBarSizeY}px)`}
+      } className={`${contentWidth > 768 ? `asd-relative sizeSections${contentWidth}` : `asd-fixed asd-z-10 sizeContainer${contentWidth}`} asd-bg-gray-300 asd-flex asd-flex-col`}>
         <HeaderChat />
         <Conversation />
         <SendMessage />

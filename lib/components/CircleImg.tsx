@@ -8,16 +8,16 @@ interface propsCircleImage {
 
 export const CircleImage: FC<propsCircleImage> = ({ image, name, onLine }) => (
   <>
-    <span className="relative">
-      <div className="relative w-10 h-10">
+    <span className="asd-relative">
+      <div className="asd-relative asd-w-10 asd-h-10">
         {
           image ?
-            <img src={image} alt="avatar" width={46} height={46} className="rounded-full" />
+            <img src={image} alt="asd-avatar" width={46} height={46} className="asd-rounded-full" />
             :
-            <p className="bg-red-100 rounded-full w-10 h-10 p-2 text-center">{name?.split(" ")[0]?.slice(0, 1)?.toUpperCase()}{name?.split(" ")[1]?.slice(0, 1)?.toUpperCase()}</p>
+            <p className="asd-bg-red-100 asd-rounded-full asd-w-10 asd-h-10 asd-p-2 asd-text-center">{name?.split(" ")[0]?.slice(0, 1)?.toUpperCase()}{name?.split(" ")[1]?.slice(0, 1)?.toUpperCase()}</p>
         }
       </div>
-      {onLine && <svg className="bg-green-300 rounded-full w-3 h-3 absolute bottom-0 right-0 border border-white" />}
+      {onLine && <svg className="asd-bg-green-300 asd-rounded-full asd-w-3 asd-h-3 asd-absolute asd-bottom-0 asd-right-0 asd-border asd-border-white" />}
     </span>
   </>
 );

@@ -21,7 +21,7 @@ export const Conversation = ({ chat, user }: any) => {
 
     return (
         <>
-            <div className="bg-gray-100 flex flex-col w-full h-full overflow-y-scroll">
+            <div className="asd-bg-gray-100 asd-flex asd-flex-col asd-w-full asd-h-full asd-overflow-y-scroll">
                 algo1
                 {/* {chat?.messages?.map((elem: any, idx: number) => {
                 return (

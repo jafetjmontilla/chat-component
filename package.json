@@ -1,7 +1,7 @@
 {
   "name": "component-library-tailwind-starter",
   "version": "0.1.0",
-  "types": "dist/types.d.ts",
+  "types": "dist/index.d.ts",
   "main": "dist/index.js",
   "src": "lib/index.js",
   "repository": "https://github.com/kokiebisu/component-library-tailwind-starter.git",
@@ -47,13 +47,13 @@
     "webpack-node-externals": "^2.5.2"
   },
   "scripts": {
-    "dev": "NODE_ENV=development webpack --watch",
+    "dev": "webpack --watch",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "build": "NODE_ENV=production webpack --watch",
+    "build": "NODE_ENV=production webpack",
     "deploy": "build-storybook && gh-pages -d storybook-static"
   },
   "files": [
     "./dist"
-  ]
+  ] 
 }

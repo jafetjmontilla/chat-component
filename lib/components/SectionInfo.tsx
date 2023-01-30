@@ -2,34 +2,36 @@ import React, { FC, useContext, useEffect, useState } from "react";
 import { StateChatContext, typeSetChatContext } from "../context/ChatContext";
 
 export const SectionInfo: FC = () => {
-  const { contentWidth, dispatch } = useContext(StateChatContext);
-  const [show, setShow] = useState(false)
+  const { contentWidth, topBarSizeY, dispatch } = useContext(StateChatContext);
+  const [showInfo, setShowInfo] = useState(false)
 
   useEffect(() => {
     setTimeout(() => {
-      setShow(true)
+      setShowInfo(true)
     }, 50);
   }, [])
 
   const handleClick: React.MouseEventHandler<HTMLButtonElement> = () => {
-    setShow(false)
+    setShowInfo(false)
     setTimeout(() => {
       dispatch({ set: typeSetChatContext.SectionInfoShow, value: false })
     }, 100);
   }
 
   const transitionVisibilite = {
+    transform: `translateY(-${contentWidth < 768 ? topBarSizeY : 0}px)`,
     transition: `opacity 0.4s`,
     opacity: `1`
   }
   const transitionInVisibilite = {
+    transform: `translateY(-${contentWidth < 768 ? topBarSizeY : 0}px)`,
     transition: "opacity 0.4s",
     opacity: `0`,
   }
 
   return (
     <>
-      <div style={show ? transitionVisibilite : transitionInVisibilite} className={`${contentWidth < 769 && "absolute z-20"} bg-white flex flex-col sizeSections${contentWidth} @md:!w-[260px]`}>
+      <div style={showInfo ? transitionVisibilite : transitionInVisibilite} className={`${contentWidth < 769 && "asd-absolute asd-z-30"} asd-bg-white asd-flex asd-flex-col sizeSections${contentWidth} @md:!asd-w-[260px]`}>
         <button onClick={handleClick}>cerrar info</button>
       </div>
     </>

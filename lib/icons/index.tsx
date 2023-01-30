@@ -13,7 +13,6 @@ export const DownloadIcon: FC<propsIcon> = (props) => {
   )
 }
 
-
 export const UploadIcon: FC<propsIcon> = (props) => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" {...props}>
@@ -32,20 +31,7 @@ export const SendIcon: FC<propsIcon> = (props) => {
 
 export const CameraIcon: FC<propsIcon> = (props) => {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      className="h-6 w-6"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-      {...props}
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={1}
-        d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
-      />
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" {...props}>
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -58,14 +44,7 @@ export const CameraIcon: FC<propsIcon> = (props) => {
 
 export const MicIcon: FC<propsIcon> = (props) => {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      className="h-6 w-6"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-      {...props}
-    >
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" {...props}>
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -80,6 +59,29 @@ export const PlusIcon: FC<propsIcon> = (props) => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" {...props}>
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+    </svg>
+  )
+}
+
+export const ArrowLeft: FC<propsIcon> = (props) => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" {...props}>
+      <path
+        color="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+    </svg>
+  )
+}
+
+export const SearchIcon: FC<propsIcon> = (props) => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" {...props}>
+      <path
+        d="M23.0065 22.2154L17.7686 16.9472C19.5414 14.9941 20.4848 12.4203 20.3944 9.77737C20.306 7.1344 19.1916 4.63178 17.289 2.80522C15.3864 0.978661 12.853 -0.0295042 10.2232 0.000147758C7.59538 0.0297997 5.08157 1.09331 3.22225 2.96336C1.36293 4.83341 0.305518 7.36173 0.274071 10.0067C0.244589 12.6497 1.245 15.2017 3.06108 17.1133C4.87716 19.0248 7.36542 20.1457 9.99323 20.2366C12.621 20.3275 15.1801 19.3787 17.1219 17.5956L22.3618 22.8657C22.4483 22.9527 22.5643 23.0001 22.6842 23.0001C22.806 23.0001 22.922 22.9507 23.0065 22.8657C23.093 22.7787 23.1401 22.6621 23.1401 22.5415C23.1401 22.4209 23.093 22.3023 23.0065 22.2154ZM1.21159 10.1332C1.21159 8.31454 1.74816 6.53938 2.75251 5.02714C3.75685 3.51489 5.18377 2.3387 6.85441 1.64286C8.52504 0.947032 10.3608 0.765167 12.1336 1.11901C13.9065 1.47286 15.5338 2.34858 16.8134 3.6335C18.0909 4.91841 18.9616 6.55717 19.3134 8.34024C19.6652 10.1233 19.4844 11.9716 18.7926 13.6499C18.1007 15.3302 16.9293 16.7653 15.4277 17.7755C13.9241 18.7856 12.1592 19.3253 10.3509 19.3253C7.92754 19.3233 5.60634 18.3527 3.89247 16.6309C2.17663 14.9072 1.21356 12.5706 1.21159 10.1332Z"
+        fill="currentColor"
+      />
     </svg>
   )
 }

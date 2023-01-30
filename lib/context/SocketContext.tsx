@@ -1,4 +1,4 @@
-import React, { createContext, FC, useState, useEffect, useContext, Dispatch, useReducer } from "react";
+import React, { createContext, FC, useState, useEffect, useContext, Dispatch, useReducer, ReactNode } from "react";
 import { Socket } from "socket.io-client";
 
 
@@ -29,7 +29,7 @@ export interface typeDispatchSocket {
 
 const StateContext = createContext<Context>(InitialValues);
 
-const StateProvider: FC = ({ children }): JSX.Element => {
+const StateProvider: FC<{ children: ReactNode }> = ({ children }): JSX.Element => {
   const [props, dispatch] = useReducer((state: StateProps, action: typeDispatchSocket) => {
     if (action.set && action.value) {
       state = { ...state, [`${action.set}`]: action.value }

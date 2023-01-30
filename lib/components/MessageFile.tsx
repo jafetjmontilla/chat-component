@@ -6,15 +6,15 @@ interface propsMessageFile {
 }
 export const MessageFile: FC<propsMessageFile> = ({ emisor }) => (
   <>
-    <div className="flex gap-10 w-full">
-      <div className="flex gap-4">
-        <div className="file w-10 h-10" />
-        <span className={emisor ? "text-white" : "text-gray-700"}>
-          <p className="text-sm ">FileImage.jpg</p>
-          <p className="text-xs">2 mb</p>
+    <div className="asd-flex asd-gap-10 asd-w-full">
+      <div className="asd-flex asd-gap-4">
+        <div className="asd-file asd-w-10 asd-h-10" />
+        <span className={emisor ? "asd-text-white" : "asd-text-gray-700"}>
+          <p className="asd-text-sm ">FileImage.jpg</p>
+          <p className="asd-text-xs">2 mb</p>
         </span>
       </div>
-      <div className="flex gap-3 items-center">
+      <div className="asd-flex asd-gap-3 asd-items-center">
       </div>
     </div>
     <style >

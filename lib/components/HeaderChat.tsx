@@ -33,13 +33,13 @@ export const HeaderChat: FC<headerChatProps> = ({ chat }) => {
   }
 
   return (
-    <div className="bg-rose-400 w-full h-20 flex items-center justify-between">
-      <div className="pb-2">
+    <div className="asd-bg-rose-400 asd-w-full asd-h-20 asd-flex asd-items-center asd-justify-between">
+      <div className="asd-pb-2">
         {contentWidth < 769 && <button onClick={handleChatShow}>regresar</button>}
         <Contact key={chat?._id} onClick={() => { }} image={chat?.photoURL} name={chat?.title} info={chat?.onLine?.status ?? chat?._id ? "Online" : chat?.onLine?.status != undefined ? getRelativeTime(chat?.onLine?.dateConection) : <br />} _id={chat?._id} />
         <button onClick={openInfo}>abrir info</button>
       </div>
-      <div className="flex items-center p-2 gap-2">
+      <div className="asd-flex asd-items-center asd-p-2 asd-gap-2">
       </div>
     </div>
   );

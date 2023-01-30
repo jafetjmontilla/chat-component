@@ -3,10 +3,11 @@ import { StateChatContext, typeSetChatContext } from "../context/ChatContext";
 import { SectionChatBox } from "./SectionChatBox";
 import { SectionChats } from "./SectionChats";
 import { SectionInfo } from "./SectionInfo";
+import { SectionResultSearch } from "./SectionResultSearch";
 import { SectionSwiper } from "./SectionSwiper";
 
 export const Sections: FC = () => {
-  const { contentWidth, contentHeight, topBarSizeY, SectionChatBoxX, SectionInfoShow, SectionChatShow, dispatch } = useContext(StateChatContext);
+  const { contentWidth, contentHeight, topBarSizeY, SectionChatBoxX, SectionInfoShow, SectionChatShow, activeSearch, dispatch } = useContext(StateChatContext);
   const [valirOpenInfo, setValirOpenInfo] = useState<boolean>(false)
   const [valirChatShow, setValirChatShow] = useState<boolean>(false)
 
@@ -36,7 +37,7 @@ export const Sections: FC = () => {
 
   return (
     <>
-      <div className={`bg-red-500 flex sizeSections${contentWidth}`}>
+      <div className={`asd-bg-red-500 asd-flex asd-sizeSections${contentWidth}`}>
         {contentWidth < 769 &&
           !SectionInfoShow && <SectionSwiper />
         }
@@ -49,6 +50,7 @@ export const Sections: FC = () => {
         {contentWidth > 768 && <SectionSwiper />}
         {contentWidth > 768 && <SectionChatBox />}
         {contentWidth > 768 && SectionInfoShow && valirOpenInfo && <SectionInfo />}
+        {activeSearch && <SectionResultSearch />}
       </div>
       <style>{`
       .sizeSections${contentWidth}{

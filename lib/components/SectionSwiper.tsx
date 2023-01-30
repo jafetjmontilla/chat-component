@@ -41,7 +41,7 @@ export const SectionSwiper: FC<sectionSwiperProps> = () => {
   const handleChatShow = () => {
     dispatch({ set: typeSetChatContext.SectionChatShow, value: true })
   }
-  const classNameButton = "block bg-primary text-white w-1/3 text-sm transition hover:opacity-90"
+  const classNameButton = `asd-block asd-bg-primary asd-text-white asd-w-1/3 asd-text-sm asd-transition hover:asd-opacity-70 `
 
   const transitionLeftclose = {
     transition: `left 0.8s 0.1s`,
@@ -56,13 +56,13 @@ export const SectionSwiper: FC<sectionSwiperProps> = () => {
     <>
       <div style={contentWidth < 769 ?
         SectionChatShow ? transitionLeftclose : transitionLeftOpen
-        : {}} className={`bg-blue-100 relative flex flex-col sizeSections${contentWidth} @md:!w-[280px]`}>
-        <div className="flex h-[5%]">
-          <Button className={classNameButton} onClick={() => { setPage(0) }} title="Chats" />
-          <Button className={classNameButton} onClick={() => { setPage(1) }} title="Contactos" />
-          <Button className={classNameButton} onClick={() => { setPage(2) }} title="Eventos" />
+        : {}} className={`asd-bg-blue-100 asd-relative asd-flex asd-flex-col sizeSections${contentWidth} @md:!asd-w-[280px]`}>
+        <div className="asd-flex asd-h-[5%]">
+          <Button className={`${classNameButton} ${page == 0 && "asd-opacity-80"}`} onClick={() => { setPage(0) }} title="Chats" />
+          <Button className={`${classNameButton} ${page == 1 && "asd-opacity-80"}`} onClick={() => { setPage(1) }} title="Contactos" />
+          <Button className={`${classNameButton} ${page == 2 && "asd-opacity-80"}`} onClick={() => { setPage(2) }} title="Eventos" />
         </div>
-        <Swiper key={1} className="bg-blue-900 w-[100%] h-[95%]"
+        <Swiper key={1} className="asd-bg-blue-900 asd-w-[100%] asd-h-[95%]"
           preloadImages={false}
           lazy={true}
           scrollbar={{
@@ -71,18 +71,18 @@ export const SectionSwiper: FC<sectionSwiperProps> = () => {
           modules={[Pagination, Scrollbar]}
         >
           <SlideTo page={page} setPage={setPage} />
-          <SwiperSlide className="bg-green-100 pb-3 overscroll-contain" onScroll={() => { }}>
+          <SwiperSlide className="asd-bg-green-100 asd-pb-3 asd-overscroll-contain" onScroll={() => { }}>
             <div>
               {contentWidth < 769 && <button onClick={handleChatShow}>ir a chat</button>}
               <SectionChats />
             </div>
           </SwiperSlide>
-          <SwiperSlide className="bg-green-300 pb-3 overscroll-contain">
+          <SwiperSlide className="asd-bg-green-300 asd-pb-3 asd-overscroll-contain">
             <div>
               <SectionContacs />
             </div>
           </SwiperSlide>
-          <SwiperSlide className="bg-green-600 pb-3 overscroll-contain">
+          <SwiperSlide className="asd-bg-green-600 asd-pb-3 asd-overscroll-contain">
             <div>
               <SectionEvents />
             </div>

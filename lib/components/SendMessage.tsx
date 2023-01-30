@@ -12,22 +12,22 @@ export const SendMessage: FC<propsSendMessage> = ({ chat, setChat, user }) => {
   const value = ""
 
   return (
-    <div className="h-max w-full bg-white p-2 px-4 flex gap-4 items-center justify-between">
+    <div className="asd-h-max asd-w-full asd-bg-white asd-p-2 asd-px-4 asd-flex asd-gap-4 asd-items-center asd-justify-between">
       <div>
         <OptionsSendMessage refInput={refInput} />
       </div>
       <input
         ref={refInput}
         placeholder="Type your message ..."
-        className="text-sm focus:ring  rounded-md py-2 px-2 w-full h-full "
+        className="asd-text-sm focus:asd-ring  asd-rounded-md asd-py-2 asd-px-2 asd-w-full asd-h-full "
         /* autoFocus */
         onChange={(e) => { }}
         value={value}
       />
-      <div className="text-gray-700 hover:text-primary cursor-pointer hover:opacity-90 transition button" onClick={() => {
+      <div className="asd-text-gray-700 hover:asd-text-primary asd-cursor-pointer asd-hover:opacity-90 asd-transition asd-button" onClick={() => {
         refInput?.current?.focus()
       }}>
-        <SendIcon className="w-5 h-5" />
+        <SendIcon className="asd-w-5 asd-h-5" />
       </div>
     </div>
   );

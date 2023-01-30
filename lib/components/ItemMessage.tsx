@@ -30,9 +30,9 @@ export const ItemMessage: FC<propsMessage> = ({ message, date, emisor = true, ty
   return (
     <>
       <div
-        className={`flex gap-4 items-center ${emisor ? "flex-row-reverse" : ""} `}
+        className={`asd-flex asd-gap-4 asd-items-center ${emisor ? "asd-flex-row-reverse" : ""} `}
       >
-        <div className={`${emisor ? "bg-rose-100 mr-4 ml-24 @md:ml-36" : "bg-white ml-4 mr-24 @md:mr-36"} rounded-xl shadow-md mb-0.5 `}>
+        <div className={`${emisor ? "asd-bg-rose-100 asd-mr-4 asd-ml-24 @md:asd-ml-36" : "asd-bg-white asd-ml-4 asd-mr-24 @md:asd-mr-36"} asd-rounded-xl asd-shadow-md asd-mb-0.5 `}>
           {types[type]}
         </div>
       </div>

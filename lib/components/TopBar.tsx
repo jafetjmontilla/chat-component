@@ -1,5 +1,6 @@
 import React, { FC, useContext, useEffect } from "react";
 import { StateChatContext } from "../context/ChatContext";
+import { SearchChat } from "./SearchChat";
 
 
 
@@ -8,8 +9,8 @@ export const TopBar: FC = () => {
 
   return (
     <>
-      <div className={`flex bg-violet-500 size${contentWidth}`}>
-        top
+      <div className={`asd-flex asd-bg-gray-100 size${contentWidth}`}>
+        <SearchChat onChange={() => { }} />
       </div>
       <style>{`
       .size${contentWidth}{
