@@ -4,7 +4,7 @@ import DefaultLayout from "../layouts/DefaultLayout";
 import "../styles.css";
 import { Sections } from "./Sections";
 import { TopBar } from "./TopBar";
-import { AppProps } from "./App.types";
+import { AppProps, ResultChats } from "./App.types";
 
 // export interface AppProps extends Partial<HTMLDivElement> {
 //   message: string
@@ -21,7 +21,7 @@ export interface typeSize {
   Y: number | undefined,
 }
 
-export const App: FC<AppProps> = ({ message, token, theme }) => {
+export const App: FC<AppProps> = ({ message, token, theme, chats, contacts, portals }) => {
   const refDiv = useRef<RefObject<HTMLDivElement>>(null)
   const refScroll = useRef<any>(null)
   const [size, setSize] = useState<typeSizeContent>()
@@ -77,7 +77,7 @@ export const App: FC<AppProps> = ({ message, token, theme }) => {
   return (
     <>
       <DefaultLayout>
-        <ComponenteRef ref={refDiv} setSize={setSize} token={token} />
+        <ComponenteRef ref={refDiv} setSize={setSize} token={token} chats={chats} contacts={contacts} portals={portals} />
         <span className="asd-bg-red-300 asd-p-1 asd-rounded-lg asd-absolute md:asd-translate-y-[-50px]">
           {`${message} ${size?.contentWidth} * ${size?.contentHeight}`}
         </span>
@@ -108,9 +108,12 @@ interface ComponenteRefProps extends Partial<HTMLDivElement> {
   setSize: Dispatch<SetStateAction<typeSizeContent | undefined>>
   ref: any
   token: string
+  chats: ResultChats
+  contacts: any
+  portals: any
 }
 
-const ComponenteRef: FC<ComponenteRefProps> = forwardRef(({ setSize, token }, ref: any) => {
+const ComponenteRef: FC<ComponenteRefProps> = forwardRef(({ setSize, token, chats, contacts, portals }, ref: any) => {
   const { contentWidth, contentHeight, dispatch: chatContextDispatch } = useContext(StateChatContext);
   const { dispatch: socketContextDispach } = useContext(StateSocketContext);
 
@@ -119,6 +122,7 @@ const ComponenteRef: FC<ComponenteRefProps> = forwardRef(({ setSize, token }, re
       chatContextDispatch({ set: typeSetChatContext.contentWidth, value: ref.current?.parentElement?.clientWidth })
       chatContextDispatch({ set: typeSetChatContext.contentHeight, value: ref.current?.parentElement?.clientHeight })
       chatContextDispatch({ set: typeSetChatContext.topBarSizeY, value: 42 })
+      chatContextDispatch({ set: typeSetChatContext.chats, value: chats })
     }
   }, [ref])
 

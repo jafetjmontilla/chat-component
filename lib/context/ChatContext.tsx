@@ -1,6 +1,8 @@
 import React, { createContext, Dispatch, FC, useReducer, Reducer, useEffect, HtmlHTMLAttributes, ReactNode } from "react";
+import { ResultChats } from "../components/App.types";
 
 interface StateProps {
+  provider: any
   contentWidth: number
   contentHeight: number
   topBarSizeX: number
@@ -10,7 +12,9 @@ interface StateProps {
   SectionInfoX: number
   SectionInfoShow: boolean
   activeSearch: boolean
-
+  chats: ResultChats | undefined
+  contacts: any
+  portals: any
 }
 
 interface Context extends StateProps {
@@ -18,6 +22,7 @@ interface Context extends StateProps {
 }
 
 const InitialValues: Context = {
+  provider: undefined,
   contentWidth: 0,
   contentHeight: 0,
   topBarSizeX: 0,
@@ -27,10 +32,14 @@ const InitialValues: Context = {
   SectionInfoX: 260,
   SectionInfoShow: false,
   activeSearch: false,
-  dispatch: () => { }
+  dispatch: () => { },
+  chats: undefined,
+  contacts: { results: [], total: 0 },
+  portals: { results: [], total: 0 }
 }
 
 export enum typeSetChatContext {
+  provider = "provider",
   contentWidth = "contentWidth",
   contentHeight = "contentHeight",
   topBarSizeX = "topBarSizeX",
@@ -39,7 +48,10 @@ export enum typeSetChatContext {
   SectionChatShow = "SectionChatShow",
   SectionInfoX = "SectionInfoX",
   SectionInfoShow = "SectionInfoShow",
-  activeSearch = "activeSearch"
+  activeSearch = "activeSearch",
+  chats = "chats",
+  contacts = "contacts",
+  portals = "portals",
 }
 
 interface typeDispatch {

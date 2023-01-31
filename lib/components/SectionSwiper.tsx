@@ -7,7 +7,7 @@ import 'swiper/css';
 import "swiper/css/bundle";
 import { SectionChats } from "./SectionChats";
 import { SectionContacs } from "./SectionContacts";
-import { SectionEvents } from "./SectionEvents";
+import { SectionPortals } from "./SectionPortals";
 
 interface slidetoProps {
   page: number
@@ -33,15 +33,26 @@ const SlideTo: FC<slidetoProps> = ({ page, setPage }) => {
 interface sectionSwiperProps {
 }
 export const SectionSwiper: FC<sectionSwiperProps> = () => {
-  const { contentWidth, SectionChatShow, dispatch } = useContext(StateChatContext);
+  const { contentWidth, SectionChatShow, dispatch, chats, contacts, portals } = useContext(StateChatContext);
   const [page, setPage] = useState(0)
   const [chatId, setChatId] = useState(null)
   const [contactUid, setContactUid] = useState(null)
 
+  ////para probar con contactos y portales
+  useEffect(() => {
+    console.log(446, contacts)
+    if (contacts?.total !== 2) {
+      dispatch({ set: typeSetChatContext.contacts, value: { ...contacts, total: 2 } })
+      dispatch({ set: typeSetChatContext.portals, value: { ...portals, total: 2 } })
+
+    }
+  }, [contacts])
+
   const handleChatShow = () => {
     dispatch({ set: typeSetChatContext.SectionChatShow, value: true })
   }
-  const classNameButton = `asd-block asd-bg-primary asd-text-white asd-w-1/3 asd-text-sm asd-transition hover:asd-opacity-70 `
+
+  const classNameButton = `asd-flex asd-bg-primary asd-text-white asd-text-sm asd-transition asd-justify-center asd-items-center hover:asd-opacity-70 ${portals?.total > 0 ? "asd-w-1/3 " : "asd-w-1/2"}`
 
   const transitionLeftclose = {
     transition: `left 0.8s 0.1s`,
@@ -57,11 +68,11 @@ export const SectionSwiper: FC<sectionSwiperProps> = () => {
       <div style={contentWidth < 769 ?
         SectionChatShow ? transitionLeftclose : transitionLeftOpen
         : {}} className={`asd-bg-blue-100 asd-relative asd-flex asd-flex-col sizeSections${contentWidth} @md:!asd-w-[280px]`}>
-        <div className="asd-flex asd-h-[5%]">
+        {contacts?.total > 0 && <div className="asd-flex asd-h-[5%]">
           <Button className={`${classNameButton} ${page == 0 && "asd-opacity-80"}`} onClick={() => { setPage(0) }} title="Chats" />
           <Button className={`${classNameButton} ${page == 1 && "asd-opacity-80"}`} onClick={() => { setPage(1) }} title="Contactos" />
-          <Button className={`${classNameButton} ${page == 2 && "asd-opacity-80"}`} onClick={() => { setPage(2) }} title="Eventos" />
-        </div>
+          {portals?.total > 0 && <Button className={`${classNameButton} ${page == 2 && "asd-opacity-80"}`} onClick={() => { setPage(2) }} title="Portales" />}
+        </div>}
         <Swiper key={1} className="asd-bg-blue-900 asd-w-[100%] asd-h-[95%]"
           preloadImages={false}
           lazy={true}
@@ -77,16 +88,16 @@ export const SectionSwiper: FC<sectionSwiperProps> = () => {
               <SectionChats />
             </div>
           </SwiperSlide>
-          <SwiperSlide className="asd-bg-green-300 asd-pb-3 asd-overscroll-contain">
+          {contacts?.total > 0 && <SwiperSlide className="asd-bg-green-300 asd-pb-3 asd-overscroll-contain">
             <div>
               <SectionContacs />
             </div>
-          </SwiperSlide>
-          <SwiperSlide className="asd-bg-green-600 asd-pb-3 asd-overscroll-contain">
+          </SwiperSlide>}
+          {portals?.total > 0 && <SwiperSlide className="asd-bg-green-600 asd-pb-3 asd-overscroll-contain">
             <div>
-              <SectionEvents />
+              <SectionPortals />
             </div>
-          </SwiperSlide>
+          </SwiperSlide>}
         </Swiper>
       </div>
       <style >
