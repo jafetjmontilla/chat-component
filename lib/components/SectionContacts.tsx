@@ -1,19 +1,33 @@
 import React, { FC, useContext } from "react";
 import { StateChatContext } from "../context/ChatContext";
+import { Contact } from "./Contact";
+import { ContainerSwiper } from "./ContainerSwiper";
 
 export const SectionContacs: FC = () => {
-  const { contentWidth, contentHeight, topBarSizeY } = useContext(StateChatContext);
+  const { contacts } = useContext(StateChatContext);
   return (
     <>
-      <div className={`asd-bg-white asd-flex asd-sizeSections${contentWidth} @md:!asd-w-[280px]`}>
-        CONTACTS
-      </div>
-      {/* <style>{`
-      .sizeSectionChat${contentWidth}{
-        width: ${contentWidth}px;
-        height: ${contentHeight - topBarSizeY}px;
-      }
-      `}</style> */}
+      <ContainerSwiper>
+        {contacts?.results?.map((elem: any, idx: number) => {
+          return (
+            <Contact
+              key={idx}
+              _id={elem?._id}
+              info={
+                elem?.eventos && elem?.eventos.map((ele: any) => {
+                  return (
+                    <span>{ele?.nombre}&nbsp;</span>
+                  )
+                })
+              }
+              image={`https://api.bodasdehoy.com${elem?.photoURL}`}
+              name={elem?.nickName}
+              onClick={() => { }}
+              onLine={elem?.onLine?.status}
+            />
+          )
+        })}
+      </ContainerSwiper>
     </>
   );
 };

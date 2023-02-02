@@ -1,13 +1,12 @@
 export interface AppProps extends Partial<HTMLDivElement> {
+  userUid: string
   message: string
   token: string
   theme: ThemeChat
   notifications: Notification[]
   chats: ResultChats,
-  contacts?: {
-    results: Contact[],
-    total: number
-  },
+  contacts: ResultContacts,
+  events: ResultEvents,
   portals?: {
     results: Portal[],
     total: number
@@ -16,9 +15,20 @@ export interface AppProps extends Partial<HTMLDivElement> {
 
 
 export interface ResultChats {
+  received?: number | null;
   total: number | null;
   results: Chat[];
 }
+export interface ResultContacts {
+  total: number | null;
+  results: Contact[];
+}
+
+export interface ResultEvents {
+  total: number | null;
+  results: Event[];
+}
+
 export interface Chat {
   _id: string
   addedes: Addedes[]
@@ -30,6 +40,7 @@ export interface Chat {
   type: string
   photoURL: string
 }
+
 export interface Addedes {
   userUid: string
   type: string
@@ -82,8 +93,10 @@ export interface Contact {
   nickName: string
   photoURL: string
   correo: string
-  portals: Portal[]
+  eventos?: Event[]
+  portals?: Portal[]
 }
+
 export interface Event {
   _id: string
   nombre: string

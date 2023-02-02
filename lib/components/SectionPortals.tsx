@@ -1,19 +1,14 @@
 import React, { FC, useContext } from "react";
 import { StateChatContext } from "../context/ChatContext";
+import { ContainerSwiper } from "./ContainerSwiper";
 
 export const SectionPortals: FC = () => {
-  const { contentWidth, contentHeight, topBarSizeY } = useContext(StateChatContext);
+  const { portals } = useContext(StateChatContext);
   return (
     <>
-      <div className={`asd-bg-white asd-flex asd-sizeSections${contentWidth} @md:!asd-w-[280px]`}>
+      <ContainerSwiper>
         PORTALES
-      </div>
-      {/* <style>{`
-      .sizeSectionChat${contentWidth}{
-        width: ${contentWidth}px;
-        height: ${contentHeight - topBarSizeY}px;
-      }
-      `}</style> */}
+      </ContainerSwiper>
     </>
   );
 };

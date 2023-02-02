@@ -37,42 +37,30 @@ export const SectionSwiper: FC<sectionSwiperProps> = () => {
   const [page, setPage] = useState(0)
   const [chatId, setChatId] = useState(null)
   const [contactUid, setContactUid] = useState(null)
-
-  ////para probar con contactos y portales
-  useEffect(() => {
-    console.log(446, contacts)
-    if (contacts?.total !== 2) {
-      dispatch({ set: typeSetChatContext.contacts, value: { ...contacts, total: 2 } })
-      dispatch({ set: typeSetChatContext.portals, value: { ...portals, total: 2 } })
-
-    }
-  }, [contacts])
-
-  const handleChatShow = () => {
-    dispatch({ set: typeSetChatContext.SectionChatShow, value: true })
-  }
-
-  const classNameButton = `asd-flex asd-bg-primary asd-text-white asd-text-sm asd-transition asd-justify-center asd-items-center hover:asd-opacity-70 ${portals?.total > 0 ? "asd-w-1/3 " : "asd-w-1/2"}`
+  // const handleChatShow = () => {
+  //   dispatch({ set: typeSetChatContext.SectionChatShow, value: true })
+  // }
+  const classNameButton = `asd-flex asd-bg-primary asd-text-white asd-text-sm asd-transition asd-justify-center asd-items-center hover:asd-opacity-70 ${portals?.total && portals?.total > 0 ? "asd-w-1/3 " : "asd-w-1/2"}`
 
   const transitionLeftclose = {
-    transition: `left 0.8s 0.1s`,
-    left: `-100%`
+    transition: `width 0.8s 0.1s`,
+    width: `30%`
   }
   const transitionLeftOpen = {
-    transition: "left 0.2s",
-    left: `0%`,
+    transition: "width 0.2s",
+    width: `100%`,
   }
 
   return (
     <>
       <div style={contentWidth < 769 ?
         SectionChatShow ? transitionLeftclose : transitionLeftOpen
-        : {}} className={`asd-bg-blue-100 asd-relative asd-flex asd-flex-col sizeSections${contentWidth} @md:!asd-w-[280px]`}>
-        {contacts?.total > 0 && <div className="asd-flex asd-h-[5%]">
+        : {}} className={`asd-bg-blue-100 asd-relative asd-flex asd-flex-col sizeSections${contentWidth} @md:!asd-w-[280px] qwe`}>
+        {contacts?.total && contacts?.total > 0 ? <div className="asd-flex asd-h-[5%]">
           <Button className={`${classNameButton} ${page == 0 && "asd-opacity-80"}`} onClick={() => { setPage(0) }} title="Chats" />
           <Button className={`${classNameButton} ${page == 1 && "asd-opacity-80"}`} onClick={() => { setPage(1) }} title="Contactos" />
-          {portals?.total > 0 && <Button className={`${classNameButton} ${page == 2 && "asd-opacity-80"}`} onClick={() => { setPage(2) }} title="Portales" />}
-        </div>}
+          {portals?.total && portals?.total > 0 && <Button className={`${classNameButton} ${page == 2 && "asd-opacity-80"}`} onClick={() => { setPage(2) }} title="Portales" />}
+        </div> : <></>}
         <Swiper key={1} className="asd-bg-blue-900 asd-w-[100%] asd-h-[95%]"
           preloadImages={false}
           lazy={true}
@@ -83,17 +71,17 @@ export const SectionSwiper: FC<sectionSwiperProps> = () => {
         >
           <SlideTo page={page} setPage={setPage} />
           <SwiperSlide className="asd-bg-green-100 asd-pb-3 asd-overscroll-contain" onScroll={() => { }}>
+            {/* {contentWidth < 769 && <button onClick={handleChatShow}>ir a chat</button>} */}
             <div>
-              {contentWidth < 769 && <button onClick={handleChatShow}>ir a chat</button>}
               <SectionChats />
             </div>
           </SwiperSlide>
-          {contacts?.total > 0 && <SwiperSlide className="asd-bg-green-300 asd-pb-3 asd-overscroll-contain">
+          {contacts?.total && contacts?.total > 0 && <SwiperSlide className="asd-bg-green-300 asd-pb-3 asd-overscroll-contain">
             <div>
               <SectionContacs />
             </div>
           </SwiperSlide>}
-          {portals?.total > 0 && <SwiperSlide className="asd-bg-green-600 asd-pb-3 asd-overscroll-contain">
+          {portals?.total && portals?.total > 0 && <SwiperSlide className="asd-bg-green-600 asd-pb-3 asd-overscroll-contain">
             <div>
               <SectionPortals />
             </div>
@@ -102,6 +90,9 @@ export const SectionSwiper: FC<sectionSwiperProps> = () => {
       </div>
       <style >
         {`
+        .qwe {
+          text-size-adjust: none;
+        }
           .swiper-scrollbar-horizontal-modified {
             left: 0% !important;
             height: 5px !important;

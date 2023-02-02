@@ -21,20 +21,18 @@ export interface typeSize {
   Y: number | undefined,
 }
 
-export const App: FC<AppProps> = ({ message, token, theme, chats, contacts, portals }) => {
+export const App: FC<AppProps> = ({ message, token, theme, chats, contacts, events: portals, userUid }) => {
   const refDiv = useRef<RefObject<HTMLDivElement>>(null)
   const refScroll = useRef<any>(null)
   const [size, setSize] = useState<typeSizeContent>()
-
-
   const [scrollPosition, setScrollPosition] = useState(0);
   const [status, setStatus] = useState<any>(0);
   const [virtualKeyboard, setVirtualKeyboard] = useState<any>(false);
   const handleScroll = () => {
     const position = refScroll.current.scrollTop;
     setScrollPosition(position);
-
   };
+
   const handleInnerHeight = () => {
     setStatus(window.innerHeight)
 
@@ -77,7 +75,7 @@ export const App: FC<AppProps> = ({ message, token, theme, chats, contacts, port
   return (
     <>
       <DefaultLayout>
-        <ComponenteRef ref={refDiv} setSize={setSize} token={token} chats={chats} contacts={contacts} portals={portals} />
+        <ComponenteRef ref={refDiv} setSize={setSize} token={token} chats={chats} contacts={contacts} portals={portals} userUid={userUid} />
         <span className="asd-bg-red-300 asd-p-1 asd-rounded-lg asd-absolute md:asd-translate-y-[-50px]">
           {`${message} ${size?.contentWidth} * ${size?.contentHeight}`}
         </span>
@@ -111,11 +109,24 @@ interface ComponenteRefProps extends Partial<HTMLDivElement> {
   chats: ResultChats
   contacts: any
   portals: any
+  userUid: string
 }
 
-const ComponenteRef: FC<ComponenteRefProps> = forwardRef(({ setSize, token, chats, contacts, portals }, ref: any) => {
+const ComponenteRef: FC<ComponenteRefProps> = forwardRef(({ setSize, token, chats, contacts, portals, userUid }, ref: any) => {
   const { contentWidth, contentHeight, dispatch: chatContextDispatch } = useContext(StateChatContext);
   const { dispatch: socketContextDispach } = useContext(StateSocketContext);
+
+
+  useEffect(() => {
+    console.log("chats", chats)
+  }, [chats])
+  useEffect(() => {
+    console.log("contacts", contacts)
+  }, [contacts])
+  useEffect(() => {
+    console.log("portals", portals)
+  }, [portals])
+
 
   useEffect(() => {
     if (ref.current) {
@@ -123,14 +134,21 @@ const ComponenteRef: FC<ComponenteRefProps> = forwardRef(({ setSize, token, chat
       chatContextDispatch({ set: typeSetChatContext.contentHeight, value: ref.current?.parentElement?.clientHeight })
       chatContextDispatch({ set: typeSetChatContext.topBarSizeY, value: 42 })
       chatContextDispatch({ set: typeSetChatContext.chats, value: chats })
+      chatContextDispatch({ set: typeSetChatContext.contacts, value: contacts })
+      chatContextDispatch({ set: typeSetChatContext.portals, value: portals })
+      chatContextDispatch({ set: typeSetChatContext.userUid, value: userUid })
     }
-  }, [ref])
-
+  }, [ref, chats, contacts, portals, userUid])
+  useEffect(() => {
+    if (ref.current) {
+      chatContextDispatch({ set: typeSetChatContext.chats, value: chats })
+    }
+  }, [chats])
   useEffect(() => {
     setSize({ contentWidth, contentHeight })
   }, [contentWidth, contentHeight])
 
   return (
-    <div ref={ref}></div>
+    <div ref={ref} id={ref}></div>
   )
 })

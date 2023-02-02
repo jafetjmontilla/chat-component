@@ -21,11 +21,6 @@ export const SearchChat: FC<propsSearchChat> = ({ onChange, }) => {
     }, 100);
   }
 
-  useEffect(() => {
-    onChange(value);
-    console.log(123, value)
-  }, [value]);
-
   return (
     <>
       <div className="asd-h-10 asd-grid asd-grid-cols-8 asd-content-center asd-pl-2 asd-pr-2">

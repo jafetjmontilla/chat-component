@@ -12,7 +12,7 @@ export const CircleImage: FC<propsCircleImage> = ({ image, name, onLine }) => (
       <div className="asd-relative asd-w-10 asd-h-10">
         {
           image ?
-            <img src={image} alt="asd-avatar" width={46} height={46} className="asd-rounded-full" />
+            <img src={image} alt="avatar" width={46} height={46} className="asd-rounded-full" />
             :
             <p className="asd-bg-red-100 asd-rounded-full asd-w-10 asd-h-10 asd-p-2 asd-text-center">{name?.split(" ")[0]?.slice(0, 1)?.toUpperCase()}{name?.split(" ")[1]?.slice(0, 1)?.toUpperCase()}</p>
         }
