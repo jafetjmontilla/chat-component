@@ -37,9 +37,9 @@ export const SectionSwiper: FC<sectionSwiperProps> = () => {
   const [page, setPage] = useState(0)
   const [chatId, setChatId] = useState(null)
   const [contactUid, setContactUid] = useState(null)
-  // const handleChatShow = () => {
-  //   dispatch({ set: typeSetChatContext.SectionChatShow, value: true })
-  // }
+  const handleChatShow = () => {
+    dispatch({ set: typeSetChatContext.SectionChatShow, value: true })
+  }
   const classNameButton = `asd-flex asd-bg-primary asd-text-white asd-text-sm asd-transition asd-justify-center asd-items-center hover:asd-opacity-70 ${portals?.total && portals?.total > 0 ? "asd-w-1/3 " : "asd-w-1/2"}`
 
   const transitionLeftclose = {
@@ -61,7 +61,7 @@ export const SectionSwiper: FC<sectionSwiperProps> = () => {
           <Button className={`${classNameButton} ${page == 1 && "asd-opacity-80"}`} onClick={() => { setPage(1) }} title="Contactos" />
           {portals?.total && portals?.total > 0 && <Button className={`${classNameButton} ${page == 2 && "asd-opacity-80"}`} onClick={() => { setPage(2) }} title="Portales" />}
         </div> : <></>}
-        <Swiper key={1} className="asd-bg-blue-900 asd-w-[100%] asd-h-[95%]"
+        <Swiper key={1} className={`asd-bg-blue-900 asd-w-[100%] ${contacts?.total && contacts?.total > 0 ? "asd-h-[95%]" : "asd-h-[100%]"}`}
           preloadImages={false}
           lazy={true}
           scrollbar={{
@@ -71,7 +71,7 @@ export const SectionSwiper: FC<sectionSwiperProps> = () => {
         >
           <SlideTo page={page} setPage={setPage} />
           <SwiperSlide className="asd-bg-green-100 asd-pb-3 asd-overscroll-contain" onScroll={() => { }}>
-            {/* {contentWidth < 769 && <button onClick={handleChatShow}>ir a chat</button>} */}
+            {contentWidth < 769 && chats?.total == 0 && <button onClick={handleChatShow}>ir a chat</button>}
             <div>
               <SectionChats />
             </div>

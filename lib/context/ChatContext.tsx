@@ -1,5 +1,5 @@
 import React, { createContext, Dispatch, FC, useReducer, Reducer, useEffect, HtmlHTMLAttributes, ReactNode } from "react";
-import { Chat, ResultChats, ResultContacts, ResultEvents } from "../components/App.types";
+import { Chat, ResultChats, ResultContacts, ResultEvents, SendMessage } from "../components/App.types";
 
 interface StateProps {
   provider: any
@@ -17,6 +17,7 @@ interface StateProps {
   portals: ResultEvents
   chat: Chat | null
   userUid: string
+  SendMessage: Dispatch<SendMessage>
 }
 
 interface Context extends StateProps {
@@ -40,6 +41,7 @@ const InitialValues: Context = {
   portals: { results: [], total: 0 },
   chat: null,
   userUid: "",
+  SendMessage: () => { },
 }
 
 export enum typeSetChatContext {
@@ -58,6 +60,7 @@ export enum typeSetChatContext {
   portals = "portals",
   chat = "chat",
   userUid = "userUid",
+  SendMessage = "SendMessage",
 }
 
 interface typeDispatch {

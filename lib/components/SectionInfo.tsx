@@ -2,7 +2,7 @@ import React, { FC, useContext, useEffect, useState } from "react";
 import { StateChatContext, typeSetChatContext } from "../context/ChatContext";
 
 export const SectionInfo: FC = () => {
-  const { contentWidth, topBarSizeY, dispatch } = useContext(StateChatContext);
+  const { contentWidth, topBarSizeY, chat, SendMessage, dispatch } = useContext(StateChatContext);
   const [showInfo, setShowInfo] = useState(false)
 
   useEffect(() => {
@@ -32,6 +32,7 @@ export const SectionInfo: FC = () => {
   return (
     <>
       <div style={showInfo ? transitionVisibilite : transitionInVisibilite} className={`${contentWidth < 769 && "asd-absolute asd-z-30"} asd-bg-white asd-flex asd-flex-col sizeSections${contentWidth} @md:!asd-w-[260px]`}>
+        <button onClick={() => { SendMessage({ chat: chat, message: "fgsd" }) }}>PRUEBA</button>
         <button onClick={handleClick}>cerrar info</button>
       </div>
     </>

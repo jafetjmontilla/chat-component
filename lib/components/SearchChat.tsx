@@ -1,6 +1,7 @@
 import React, { Dispatch, FC, SetStateAction, useContext, useEffect, useState } from "react";
 import { StateChatContext, typeSetChatContext } from "../context";
 import { ArrowLeft, SearchIcon } from "../icons";
+import { ContainerIcon } from "./ContainerIcon";
 
 interface propsSearchChat {
   onChange: Dispatch<any>
@@ -17,19 +18,17 @@ export const SearchChat: FC<propsSearchChat> = ({ onChange, }) => {
   const handleClick: React.MouseEventHandler<HTMLDivElement> = () => {
     activeSearch ? setValue("") : document.getElementById("search")?.focus()
     setTimeout(() => {
-      dispatch({ set: typeSetChatContext.activeSearch, value: false })
+      dispatch({ set: typeSetChatContext.activeSearch, value: !activeSearch })
     }, 100);
   }
 
   return (
     <>
       <div className="asd-h-10 asd-grid asd-grid-cols-8 asd-content-center asd-pl-2 asd-pr-2">
-        <div
-          className="asd-bg-white asd-flex asd-justify-center asd-items-center asd-cursor-pointer"
-          onClick={handleClick}
-        >
+        <ContainerIcon onMouseDown={handleClick} className="asd-bg-white">
           {!activeSearch ? <SearchIcon className="asd-w-4 asd-h-4" /> : <ArrowLeft className="asd-w-6 asd-h-6" />}
-        </div>
+        </ContainerIcon>
+
         <div className="asd-bg-white asd-col-span-7">
           <input
             id="search"

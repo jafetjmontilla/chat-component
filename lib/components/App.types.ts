@@ -1,3 +1,5 @@
+import { Dispatch } from "react"
+
 export interface AppProps extends Partial<HTMLDivElement> {
   userUid: string
   message: string
@@ -11,6 +13,7 @@ export interface AppProps extends Partial<HTMLDivElement> {
     results: Portal[],
     total: number
   },
+  SendMessage: Dispatch<SendMessage>
 }
 
 
@@ -113,4 +116,9 @@ export interface Image {
   i800: string
   i640: string
   i320: string
+}
+
+export interface SendMessage {
+  chat: Chat | null
+  message: string
 }

@@ -21,7 +21,7 @@ export interface typeSize {
   Y: number | undefined,
 }
 
-export const App: FC<AppProps> = ({ message, token, theme, chats, contacts, events: portals, userUid }) => {
+export const App: FC<AppProps> = ({ message, token, theme, chats, contacts, events: portals, userUid, SendMessage }) => {
   const refDiv = useRef<RefObject<HTMLDivElement>>(null)
   const refScroll = useRef<any>(null)
   const [size, setSize] = useState<typeSizeContent>()
@@ -75,7 +75,7 @@ export const App: FC<AppProps> = ({ message, token, theme, chats, contacts, even
   return (
     <>
       <DefaultLayout>
-        <ComponenteRef ref={refDiv} setSize={setSize} token={token} chats={chats} contacts={contacts} portals={portals} userUid={userUid} />
+        <ComponenteRef ref={refDiv} setSize={setSize} token={token} chats={chats} contacts={contacts} portals={portals} userUid={userUid} SendMessage={SendMessage} />
         <span className="asd-bg-red-300 asd-p-1 asd-rounded-lg asd-absolute md:asd-translate-y-[-50px]">
           {`${message} ${size?.contentWidth} * ${size?.contentHeight}`}
         </span>
@@ -110,9 +110,10 @@ interface ComponenteRefProps extends Partial<HTMLDivElement> {
   contacts: any
   portals: any
   userUid: string
+  SendMessage: any
 }
 
-const ComponenteRef: FC<ComponenteRefProps> = forwardRef(({ setSize, token, chats, contacts, portals, userUid }, ref: any) => {
+const ComponenteRef: FC<ComponenteRefProps> = forwardRef(({ setSize, token, chats, contacts, portals, userUid, SendMessage }, ref: any) => {
   const { contentWidth, contentHeight, dispatch: chatContextDispatch } = useContext(StateChatContext);
   const { dispatch: socketContextDispach } = useContext(StateSocketContext);
 
@@ -144,6 +145,13 @@ const ComponenteRef: FC<ComponenteRefProps> = forwardRef(({ setSize, token, chat
       chatContextDispatch({ set: typeSetChatContext.chats, value: chats })
     }
   }, [chats])
+  useEffect(() => {
+    if (ref.current) {
+      console.log(0.0001, SendMessage)
+      chatContextDispatch({ set: typeSetChatContext.SendMessage, value: SendMessage })
+    }
+  }, [SendMessage])
+
   useEffect(() => {
     setSize({ contentWidth, contentHeight })
   }, [contentWidth, contentHeight])
