@@ -14,9 +14,9 @@ export const SectionContacs: FC = () => {
               key={idx}
               _id={elem?._id}
               info={
-                elem?.eventos && elem?.eventos.map((ele: any) => {
+                elem?.eventos && elem?.eventos.map((ele: any, i: number) => {
                   return (
-                    <span>{ele?.nombre}&nbsp;</span>
+                    <span key={i}>{ele?.nombre}&nbsp;</span>
                   )
                 })
               }
