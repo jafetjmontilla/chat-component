@@ -37,7 +37,7 @@ export const Sections: FC = () => {
 
   return (
     <>
-      <div className={`asd-bg-red-500 asd-flex asd-sizeSections${contentWidth}`}>
+      <div className={`asd-bg-white asd-flex asd-sizeSections${contentWidth}`}>
         {contentWidth < 769 &&
           !SectionInfoShow && <SectionSwiper />
         }

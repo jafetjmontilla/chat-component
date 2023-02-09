@@ -35,7 +35,7 @@ export const HeaderChat: FC<headerChatProps> = ({ chat }) => {
   }
 
   return (
-    <div className="asd-bg-rose-400 asd-w-full asd-h-16 asd-flex asd-items-center ">
+    <div className="asd-bg-gray-100 asd-w-full asd-h-16 asd-flex asd-items-center ">
       {/* <div className="asd-flex asd-pb-2"> */}
       {contentWidth < 769 &&
         <ContainerIcon onClick={handleChatShow}>

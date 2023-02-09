@@ -9,7 +9,7 @@ export const TopBar: FC = () => {
 
   return (
     <>
-      <div className={`asd-flex asd-bg-gray-100 size${contentWidth}`}>
+      <div className={`asd-flex asd-bg-gray-100 asd-border-b-2 asd-border-gray-200 size${contentWidth}`}>
         <SearchChat onChange={() => { }} />
       </div>
       <style>{`

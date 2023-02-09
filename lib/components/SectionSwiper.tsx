@@ -55,7 +55,7 @@ export const SectionSwiper: FC<sectionSwiperProps> = () => {
     <>
       <div style={contentWidth < 769 ?
         SectionChatShow ? transitionLeftclose : transitionLeftOpen
-        : {}} className={`asd-bg-blue-100 asd-relative asd-flex asd-flex-col sizeSections${contentWidth} @md:!asd-w-[280px] qwe`}>
+        : {}} className={`asd-bg-blue-100 asd-relative asd-flex asd-flex-col sizeSections${contentWidth} @md:!asd-w-[340px] asd-border-r-4 asd-border-l-4 asd-border-gray-100 qwe`}>
         {contacts?.total && contacts?.total > 0 ? <div className="asd-flex asd-h-[5%]">
           <Button className={`${classNameButton} ${page == 0 && "asd-opacity-80"}`} onClick={() => { setPage(0) }} title="Chats" />
           <Button className={`${classNameButton} ${page == 1 && "asd-opacity-80"}`} onClick={() => { setPage(1) }} title="Contactos" />

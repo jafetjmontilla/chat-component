@@ -23,7 +23,7 @@ export const SectionResultSearch: FC = () => {
 
   return (
     <>
-      <div style={show ? transitionVisibilite : transitionInVisibilite} className={`asd-bg-red-500 asd-absolute asd-z-50 asd-flex asd-flex-col asd-overflow-y-scroll asd-w-full asd-h-full sizeSections${contentWidth} @md:!asd-w-[280px]`}>
+      <div style={show ? transitionVisibilite : transitionInVisibilite} className={`asd-bg-white asd-absolute asd-z-50 asd-flex asd-flex-col asd-overflow-y-scroll asd-w-full asd-h-full asd-border-r-4 asd-border-l-4 asd-border-gray-100 sizeSections${contentWidth} @md:!asd-w-[340px]`}>
         resultado busqueda
       </div>
     </>

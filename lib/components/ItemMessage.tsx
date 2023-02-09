@@ -32,7 +32,7 @@ export const ItemMessage: FC<propsMessage> = ({ message, date, emisor = true, ty
       <div
         className={`asd-flex asd-gap-4 asd-items-center ${emisor ? "asd-flex-row-reverse" : ""} `}
       >
-        <div className={`${emisor ? "asd-bg-rose-100 asd-mr-4 asd-ml-24 @md:asd-ml-36" : "asd-bg-white asd-ml-4 asd-mr-24 @md:asd-mr-36"} asd-rounded-xl asd-shadow-md asd-mb-0.5 `}>
+        <div className={`${emisor ? "asd-bg-rose-100 asd-mr-4 asd-ml-24 @md:asd-ml-36" : "asd-bg-white asd-ml-4 asd-mr-24 @md:asd-mr-36"} asd-rounded-lg asd-shadow-md asd-mb-0.5 `}>
           {types[type]}
         </div>
       </div>

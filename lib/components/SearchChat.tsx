@@ -24,12 +24,11 @@ export const SearchChat: FC<propsSearchChat> = ({ onChange, }) => {
 
   return (
     <>
-      <div className="asd-h-10 asd-grid asd-grid-cols-8 asd-content-center asd-pl-2 asd-pr-2">
-        <ContainerIcon onMouseDown={handleClick} className="asd-bg-white">
-          {!activeSearch ? <SearchIcon className="asd-w-4 asd-h-4" /> : <ArrowLeft className="asd-w-6 asd-h-6" />}
-        </ContainerIcon>
-
-        <div className="asd-bg-white asd-col-span-7">
+      <div className="asd-h-10 asd-flex asd-w-full asd-pl-2 asd-pr-2 asd-items-center asd-justify-start">
+        <div className="asd-bg-white asd-flex asd-items-center asd-justify-start asd-w-full asd-rounded-full @md:asd-w-[306px]">
+          <ContainerIcon onClick={handleClick} className="asd-w-8">
+            {!activeSearch ? <SearchIcon className="asd-w-4 asd-h-4" /> : <ArrowLeft className="asd-w-6 asd-h-6" />}
+          </ContainerIcon>
           <input
             id="search"
             placeholder="Buscar chat"
@@ -37,7 +36,7 @@ export const SearchChat: FC<propsSearchChat> = ({ onChange, }) => {
             onChange={handleChange}
             onFocus={() => { dispatch({ set: typeSetChatContext.activeSearch, value: true }) }}
             autoComplete="off"
-            className="asd-w-full asd-h-8 asd-pl-2 asd-text-sm asd-rounded-md asd-focus:outline-none asd-border-b asd-border-color-base focus:asd-outline-none "
+            className="asd-w-[80%] asd-h-8 asd-pl-2 asd-text-sm asd-rounded-md asd-border-b asd-border-color-base focus:asd-outline-none"
           />
         </div>
       </div>

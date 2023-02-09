@@ -1,5 +1,7 @@
-import React, { FC, useRef } from "react";
+import React, { FC, useRef, useState } from "react";
 import { SendIcon } from "../icons";
+import { CircleIcon } from "./CircleIcon";
+import { ContainerIcon } from "./ContainerIcon";
 import { OptionsSendMessage } from "./OptionsSenMessage";
 
 interface propsSendMessage {
@@ -8,26 +10,22 @@ interface propsSendMessage {
   user?: any
 }
 export const SendMessage: FC<propsSendMessage> = ({ chat, setChat, user }) => {
+  const [value, setValue] = useState<string>()
   const refInput = useRef<any>(null)
-  const value = ""
 
   return (
-    <div className="asd-h-max asd-w-full asd-bg-white asd-p-2 asd-px-4 asd-flex asd-gap-4 asd-items-center asd-justify-between">
-      <div>
-        <OptionsSendMessage refInput={refInput} />
-      </div>
-      <input
-        ref={refInput}
-        placeholder="Type your message ..."
-        className="asd-text-sm focus:asd-ring  asd-rounded-md asd-py-2 asd-px-2 asd-w-full asd-h-full "
-        /* autoFocus */
-        onChange={(e) => { }}
-        value={value}
-      />
-      <div className="asd-text-gray-700 hover:asd-text-primary asd-cursor-pointer asd-hover:opacity-90 asd-transition asd-button" onClick={() => {
-        refInput?.current?.focus()
-      }}>
-        <SendIcon className="asd-w-5 asd-h-5" />
+    <div className="asd-h-max asd-w-full asd-bg-gray-200 asd-p-2 asd-px-4 asd-flex asd-gap-4 asd-items-center asd-justify-between">
+      <div className="asd-bg-white asd-flex asd-w-full asd-h-8 asd-rounded-full">
+        <input
+          ref={refInput}
+          placeholder="Type your message ..."
+          className="asd-text-sm focus:asd-outline-none asd-w-full asd-ml-2 asd-h-full "
+          onChange={(e) => { setValue(e.target.value) }}
+          value={value}
+        />
+        <ContainerIcon className="asd-pl-2 asd-pr-2" onClick={() => { refInput?.current?.focus() }}>
+          <SendIcon className="asd-w-5 asd-h-5" />
+        </ContainerIcon>
       </div>
     </div>
   );

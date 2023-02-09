@@ -76,7 +76,7 @@ export const App: FC<AppProps> = ({ message, token, theme, chats, contacts, even
     <>
       <DefaultLayout>
         <ComponenteRef ref={refDiv} setSize={setSize} token={token} chats={chats} contacts={contacts} portals={portals} userUid={userUid} SendMessage={SendMessage} />
-        <span className="asd-bg-red-300 asd-p-1 asd-rounded-lg asd-absolute md:asd-translate-y-[-50px]">
+        <span className="asd-bg-white asd-p-1 asd-rounded-lg asd-absolute md:asd-translate-y-[-50px]">
           {`${message} ${size?.contentWidth} * ${size?.contentHeight}`}
         </span>
         <p className="asd-absolute asd-z-40 asd-translate-x-32 asd-translate-y-96">{`${scrollPosition} ${status} ${size?.contentHeight} ${virtualKeyboard}`}</p>

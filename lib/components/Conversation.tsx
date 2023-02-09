@@ -23,7 +23,7 @@ export const Conversation = () => {
 
     return (
         <>
-            <div className="asd-bg-gray-100 asd-flex asd-flex-col asd-w-full asd-h-full asd-overflow-y-scroll">
+            <div className="asd-bg-white asd-flex asd-flex-col asd-w-full asd-h-full asd-overflow-y-scroll">
                 {chat?.messages?.map((elem: any, idx: number) => {
                     return (
                         <ItemMessage key={idx} type={elem.type} emisor={userUid == elem.emitUserUid} message={elem.message} date={getHour(elem.createdAt)} />
