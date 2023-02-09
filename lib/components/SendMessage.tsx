@@ -14,7 +14,7 @@ export const SendMessage: FC<propsSendMessage> = ({ chat, setChat, user }) => {
   const refInput = useRef<any>(null)
 
   return (
-    <div className="asd-h-max asd-w-full asd-bg-gray-200 asd-p-2 asd-px-4 asd-flex asd-gap-4 asd-items-center asd-justify-between">
+    <div className="asd-h-max asd-z-30 asd-w-full asd-bg-gray-200 asd-p-2 asd-px-4 asd-flex asd-gap-4 asd-items-center asd-justify-between">
       <div className="asd-bg-white asd-flex asd-w-full asd-h-8 asd-rounded-full">
         <input
           ref={refInput}
