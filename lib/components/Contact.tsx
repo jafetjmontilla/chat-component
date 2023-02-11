@@ -1,19 +1,15 @@
-import React, { FC, MouseEventHandler } from "react";
+import React, { FC, MouseEventHandler, ReactNode, useEffect } from "react";
 import { Item } from './Item'
 
 
 interface propsContact {
-  image: any
-  name: String
-  info: any
-  _id: String
+  image: string
+  name: string
+  info: string | ReactNode
+  _id: string
   onClick: MouseEventHandler
   onLine?: boolean
-
 }
-
-
-
 export const Contact: FC<propsContact> = ({ image, onClick, name, info, _id, onLine }) => {
   return (
     <>
@@ -21,7 +17,6 @@ export const Contact: FC<propsContact> = ({ image, onClick, name, info, _id, onL
         <button onClick={onClick} className="asd-w-full asd-text-left asd-flex">
           <Item image={image} name={name} info={info} _id={_id} onLine={onLine} />
         </button>
-
       </div>
     </>
   );

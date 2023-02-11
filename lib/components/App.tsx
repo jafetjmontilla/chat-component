@@ -21,7 +21,7 @@ export interface typeSize {
   Y: number | undefined,
 }
 
-export const App: FC<AppProps> = ({ message, token, theme, chats, contacts, events: portals, userUid, SendMessage }) => {
+export const App: FC<AppProps> = ({ message, token, theme, chats, contacts, events: portals, userUid, sendMessage }) => {
   const refDiv = useRef<RefObject<HTMLDivElement>>(null)
   const refScroll = useRef<any>(null)
   const [size, setSize] = useState<typeSizeContent>()
@@ -75,11 +75,11 @@ export const App: FC<AppProps> = ({ message, token, theme, chats, contacts, even
   return (
     <>
       <DefaultLayout>
-        <ComponenteRef ref={refDiv} setSize={setSize} token={token} chats={chats} contacts={contacts} portals={portals} userUid={userUid} SendMessage={SendMessage} />
-        <span className="asd-bg-white asd-p-1 asd-rounded-lg asd-absolute md:asd-translate-y-[-50px]">
-          {`${message} ${size?.contentWidth} * ${size?.contentHeight}`}
-        </span>
-        <p className="asd-absolute asd-z-40 asd-translate-x-32 asd-translate-y-96">{`${scrollPosition} ${status} ${size?.contentHeight} ${virtualKeyboard}`}</p>
+        <ComponenteRef ref={refDiv} setSize={setSize} token={token} chats={chats} contacts={contacts} portals={portals} userUid={userUid} sendMessage={sendMessage} />
+        {/* <span className="asd-bg-white asd-p-1 asd-rounded-lg asd-absolute md:asd-translate-y-[-50px]"> */}
+        {/* {`${message} ${size?.contentWidth} * ${size?.contentHeight}`} */}
+        {/* </span> */}
+        {/* <p className="asd-absolute asd-z-40 asd-translate-x-32 asd-translate-y-96">{`${scrollPosition} ${status} ${size?.contentHeight} ${virtualKeyboard}`}</p> */}
         <div ref={refScroll} className={`asd-@container asd-flex asd-flex-col asd-bg-orange-500 asd-md:bg-orange-500 asd-sizeContainer${size?.contentWidth}`}>
           <TopBar />
           <Sections />
@@ -110,10 +110,10 @@ interface ComponenteRefProps extends Partial<HTMLDivElement> {
   contacts: any
   portals: any
   userUid: string
-  SendMessage: any
+  sendMessage: any
 }
 
-const ComponenteRef: FC<ComponenteRefProps> = forwardRef(({ setSize, token, chats, contacts, portals, userUid, SendMessage }, ref: any) => {
+const ComponenteRef: FC<ComponenteRefProps> = forwardRef(({ setSize, token, chats, contacts, portals, userUid, sendMessage }, ref: any) => {
   const { contentWidth, contentHeight, dispatch: chatContextDispatch } = useContext(StateChatContext);
   const { dispatch: socketContextDispach } = useContext(StateSocketContext);
 
@@ -134,23 +134,23 @@ const ComponenteRef: FC<ComponenteRefProps> = forwardRef(({ setSize, token, chat
       chatContextDispatch({ set: typeSetChatContext.contentWidth, value: ref.current?.parentElement?.clientWidth })
       chatContextDispatch({ set: typeSetChatContext.contentHeight, value: ref.current?.parentElement?.clientHeight })
       chatContextDispatch({ set: typeSetChatContext.topBarSizeY, value: 42 })
-      chatContextDispatch({ set: typeSetChatContext.chats, value: chats })
       chatContextDispatch({ set: typeSetChatContext.contacts, value: contacts })
       chatContextDispatch({ set: typeSetChatContext.portals, value: portals })
       chatContextDispatch({ set: typeSetChatContext.userUid, value: userUid })
     }
-  }, [ref, chats, contacts, portals, userUid])
+  }, [ref, contacts, portals, userUid])
   useEffect(() => {
     if (ref.current) {
+      //chats.results.sort(((a, b) => b.updatedAt - a.updatedAt))
       chatContextDispatch({ set: typeSetChatContext.chats, value: chats })
     }
   }, [chats])
   useEffect(() => {
     if (ref.current) {
-      console.log(0.0001, SendMessage)
-      chatContextDispatch({ set: typeSetChatContext.SendMessage, value: SendMessage })
+      console.log(0.0001, sendMessage)
+      chatContextDispatch({ set: typeSetChatContext.sendMessage, value: sendMessage })
     }
-  }, [SendMessage])
+  }, [sendMessage])
 
   useEffect(() => {
     setSize({ contentWidth, contentHeight })

@@ -1,6 +1,6 @@
-import React, { FC, MouseEventHandler, useContext, useEffect } from "react";
+import React, { FC, useContext } from "react";
 import { StateChatContext, typeSetChatContext } from "../context/ChatContext";
-import { Chat, Chats } from "./App.types";
+import { Chat } from "./App.types";
 import { Contact } from "./Contact";
 import { ContainerSwiper } from "./ContainerSwiper";
 
@@ -13,42 +13,19 @@ export const SectionChats: FC = () => {
   return (
     <>
       <ContainerSwiper>
-        {chats?.results?.map((elem: any, idx: number) => {
+        {chats?.results?.map((elem: Chat, idx: number) => {
           return (
             <Contact
               key={idx}
               _id={elem?._id}
               info={elem?.messages[elem?.messages?.length - 1].message}
-              image={`https://api.bodasdehoy.com${elem?.photoURL}`}
+              image={elem?.photoURL?.split(":")[0] == "https" ? elem?.photoURL : `https://api.bodasdehoy.com${elem?.photoURL}`}
               name={elem?.title}
-              onClick={() => { handle(elem) }}
               onLine={elem?.onLine?.status}
+              onClick={() => { handle(elem) }}
             />
           )
         })}
-
-        {/* <Contact _id={"id"} info={"info"} image={""} name={"nombre"} onClick={() => { }} onLine={true} />
-        <Contact _id={"id"} info={"info"} image={""} name={"nombre"} onClick={() => { }} onLine={true} />
-        <Contact _id={"id"} info={"info"} image={""} name={"nombre"} onClick={() => { }} />
-        <Contact _id={"id"} info={"info"} image={""} name={"nombre"} onClick={() => { }} />
-        <Contact _id={"id"} info={"info"} image={""} name={"nombre"} onClick={() => { }} />
-        <Contact _id={"id"} info={"info"} image={""} name={"nombre"} onClick={() => { }} />
-        <Contact _id={"id"} info={"info"} image={""} name={"nombre"} onClick={() => { }} />
-        <Contact _id={"id"} info={"info"} image={""} name={"nombre"} onClick={() => { }} />
-        <Contact _id={"id"} info={"info"} image={""} name={"nombre"} onClick={() => { }} />
-        <Contact _id={"id"} info={"info"} image={""} name={"nombre"} onClick={() => { }} />
-        <Contact _id={"id"} info={"info"} image={""} name={"nombre"} onClick={() => { }} />
-        <Contact _id={"id"} info={"info"} image={""} name={"nombre"} onClick={() => { }} />
-        <Contact _id={"id"} info={"info"} image={""} name={"nombre"} onClick={() => { }} />
-        <Contact _id={"id"} info={"info"} image={""} name={"nombre"} onClick={() => { }} />
-        <Contact _id={"id"} info={"info"} image={""} name={"nombre"} onClick={() => { }} />
-        <Contact _id={"id"} info={"info"} image={""} name={"nombre"} onClick={() => { }} />
-        <Contact _id={"id"} info={"info"} image={""} name={"nombre"} onClick={() => { }} />
-        <Contact _id={"id"} info={"info"} image={""} name={"nombre"} onClick={() => { }} />
-        <Contact _id={"id"} info={"info"} image={""} name={"nombre"} onClick={() => { }} />
-        <Contact _id={"id"} info={"info"} image={""} name={"nombre"} onClick={() => { }} />
-        <Contact _id={"id"} info={"info"} image={""} name={"nombre"} onClick={() => { }} />
-        <Contact _id={"id"} info={"info"} image={""} name={"nombre"} onClick={() => { }} /> */}
       </ContainerSwiper>
     </>
   );

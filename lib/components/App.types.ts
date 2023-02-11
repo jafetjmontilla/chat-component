@@ -13,7 +13,7 @@ export interface AppProps extends Partial<HTMLDivElement> {
     results: Portal[],
     total: number
   },
-  SendMessage: Dispatch<SendMessage>
+  sendMessage: Dispatch<SendMessage>
 }
 
 
@@ -121,4 +121,5 @@ export interface Image {
 export interface SendMessage {
   chat: Chat | null
   message: string
+  type: string
 }

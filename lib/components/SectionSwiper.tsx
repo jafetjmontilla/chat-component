@@ -78,7 +78,7 @@ export const SectionSwiper: FC<sectionSwiperProps> = () => {
           </SwiperSlide>
           {contacts?.total && contacts?.total > 0 && <SwiperSlide className="asd-bg-green-300 asd-pb-3 asd-overscroll-contain">
             <div>
-              <SectionContacs />
+              <SectionContacs setPage={setPage} />
             </div>
           </SwiperSlide>}
           {portals?.total && portals?.total > 0 && <SwiperSlide className="asd-bg-green-600 asd-pb-3 asd-overscroll-contain">

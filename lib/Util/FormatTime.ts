@@ -37,3 +37,9 @@ export const getHour = (number: number): string => {
   const resp: string = `${h == 0 ? 12 : h}:${m < 10 ? `0${m}` : m} ${t}`
   return resp
 };
+
+export const getDate = (number: number | undefined = 0): string => {
+  const date = new Date(number)
+  const resp = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
+  return resp
+};

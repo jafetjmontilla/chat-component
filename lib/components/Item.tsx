@@ -1,5 +1,5 @@
 import React, { FC, memo } from "react";
-import { CircleImage } from './CircleImg'
+import { CircleImage } from './CircleImage'
 
 
 interface propsItem {

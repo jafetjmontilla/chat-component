@@ -7,7 +7,7 @@ import { SectionResultSearch } from "./SectionResultSearch";
 import { SectionSwiper } from "./SectionSwiper";
 
 export const Sections: FC = () => {
-  const { contentWidth, contentHeight, topBarSizeY, SectionChatBoxX, SectionInfoShow, SectionChatShow, activeSearch, dispatch } = useContext(StateChatContext);
+  const { contentWidth, contentHeight, topBarSizeY, SectionChatBoxX, SectionInfoShow, SectionChatShow, activeSearch, chat, dispatch } = useContext(StateChatContext);
   const [valirOpenInfo, setValirOpenInfo] = useState<boolean>(false)
   const [valirChatShow, setValirChatShow] = useState<boolean>(false)
 
@@ -35,6 +35,16 @@ export const Sections: FC = () => {
     }
   }, [SectionChatShow])
 
+
+  const transitionOpacityUp = {
+    transition: `opacity 0.4s`,
+    opacity: `1`
+  }
+  const transitionOpacityDown = {
+    transition: "opacity 2s",
+    opacity: `0`,
+  }
+
   return (
     <>
       <div className={`asd-bg-white asd-flex asd-sizeSections${contentWidth}`}>
@@ -48,7 +58,7 @@ export const Sections: FC = () => {
           valirChatShow && <SectionChatBox />
         }
         {contentWidth > 768 && <SectionSwiper />}
-        {contentWidth > 768 && <SectionChatBox />}
+        {contentWidth > 768 && SectionChatShow && <SectionChatBox />}
         {contentWidth > 768 && SectionInfoShow && valirOpenInfo && <SectionInfo />}
         {activeSearch && <SectionResultSearch />}
       </div>

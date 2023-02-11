@@ -1,10 +1,30 @@
-import React, { FC, useContext } from "react";
-import { StateChatContext } from "../context/ChatContext";
+import React, { Dispatch, FC, useContext } from "react";
+import { StateChatContext, typeSetChatContext } from "../context/ChatContext";
+import { Chat, OnLine } from "./App.types";
 import { Contact } from "./Contact";
 import { ContainerSwiper } from "./ContainerSwiper";
 
-export const SectionContacs: FC = () => {
-  const { contacts } = useContext(StateChatContext);
+interface props {
+  setPage: Dispatch<number>
+}
+
+export const SectionContacs: FC<props> = ({ setPage }) => {
+  const { contacts, chats, dispatch } = useContext(StateChatContext);
+  interface propsValue {
+    uid: string
+    title: string
+    photoURL: string
+    onLine: OnLine
+  }
+  const handle = (value: propsValue) => {
+    const chatFilter = chats?.results?.filter((elem: any) => elem?.title == value?.title)[0]
+    if (chatFilter) {
+      dispatch({ set: typeSetChatContext.chat, value: chatFilter })
+    }
+    dispatch({ set: typeSetChatContext.SectionChatShow, value: true })
+    setPage(0)
+  }
+
   return (
     <>
       <ContainerSwiper>
@@ -20,9 +40,17 @@ export const SectionContacs: FC = () => {
                   )
                 })
               }
-              image={`https://api.bodasdehoy.com${elem?.photoURL}`}
+              image={elem?.photoURL?.split(":")[0] == "https" ? elem?.photoURL : `https://api.bodasdehoy.com${elem?.photoURL}`}
               name={elem?.nickName}
-              onClick={() => { }}
+              //HandleContacts({ setPage, setActive, setContactUid, setChatId, item })
+              onClick={() => {
+                handle({
+                  title: elem?.nickName,
+                  onLine: elem?.onLine,
+                  photoURL: elem?.photoURL,
+                  uid: elem?.uid
+                })
+              }}
               onLine={elem?.onLine?.status}
             />
           )

@@ -17,7 +17,7 @@ interface StateProps {
   portals: ResultEvents
   chat: Chat | null
   userUid: string
-  SendMessage: Dispatch<SendMessage>
+  sendMessage: Dispatch<SendMessage>
 }
 
 interface Context extends StateProps {
@@ -41,7 +41,7 @@ const InitialValues: Context = {
   portals: { results: [], total: 0 },
   chat: null,
   userUid: "",
-  SendMessage: () => { },
+  sendMessage: () => { },
 }
 
 export enum typeSetChatContext {
@@ -60,7 +60,7 @@ export enum typeSetChatContext {
   portals = "portals",
   chat = "chat",
   userUid = "userUid",
-  SendMessage = "SendMessage",
+  sendMessage = "sendMessage",
 }
 
 interface typeDispatch {
