@@ -18,6 +18,8 @@ interface StateProps {
   chat: Chat | null
   userUid: string
   sendMessage: Dispatch<SendMessage>
+  handleSearchChat: Dispatch<any>
+  resultSearchChat: ResultChats | undefined
 }
 
 interface Context extends StateProps {
@@ -42,6 +44,8 @@ const InitialValues: Context = {
   chat: null,
   userUid: "",
   sendMessage: () => { },
+  handleSearchChat: () => { },
+  resultSearchChat: undefined
 }
 
 export enum typeSetChatContext {
@@ -61,6 +65,8 @@ export enum typeSetChatContext {
   chat = "chat",
   userUid = "userUid",
   sendMessage = "sendMessage",
+  handleSearchChat = "handleSearchChat",
+  resultSearchChat = "resultSearchChat"
 }
 
 interface typeDispatch {

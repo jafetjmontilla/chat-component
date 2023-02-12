@@ -5,12 +5,12 @@ import { SearchChat } from "./SearchChat";
 
 
 export const TopBar: FC = () => {
-  const { contentWidth, topBarSizeY } = useContext(StateChatContext);
+  const { contentWidth, topBarSizeY, handleSearchChat } = useContext(StateChatContext);
 
   return (
     <>
       <div className={`asd-flex asd-bg-gray-100 asd-border-b-2 asd-border-gray-200 size${contentWidth}`}>
-        <SearchChat onChange={() => { }} />
+        <SearchChat handleSearchChat={handleSearchChat} />
       </div>
       <style>{`
       .size${contentWidth}{

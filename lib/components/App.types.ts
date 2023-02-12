@@ -7,13 +7,14 @@ export interface AppProps extends Partial<HTMLDivElement> {
   theme: ThemeChat
   notifications: Notification[]
   chats: ResultChats,
-  contacts: ResultContacts,
-  events: ResultEvents,
+  contacts: ResultContacts
+  events: ResultEvents
   portals?: {
-    results: Portal[],
+    results: Portal[]
     total: number
   },
   sendMessage: Dispatch<SendMessage>
+  handleSearchChat: Dispatch<any>
 }
 
 

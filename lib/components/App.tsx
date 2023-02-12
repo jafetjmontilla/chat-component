@@ -21,7 +21,7 @@ export interface typeSize {
   Y: number | undefined,
 }
 
-export const App: FC<AppProps> = ({ message, token, theme, chats, contacts, events: portals, userUid, sendMessage }) => {
+export const App: FC<AppProps> = ({ message, token, theme, chats, contacts, events: portals, userUid, sendMessage, handleSearchChat }) => {
   const refDiv = useRef<RefObject<HTMLDivElement>>(null)
   const refScroll = useRef<any>(null)
   const [size, setSize] = useState<typeSizeContent>()
@@ -75,7 +75,7 @@ export const App: FC<AppProps> = ({ message, token, theme, chats, contacts, even
   return (
     <>
       <DefaultLayout>
-        <ComponenteRef ref={refDiv} setSize={setSize} token={token} chats={chats} contacts={contacts} portals={portals} userUid={userUid} sendMessage={sendMessage} />
+        <ComponenteRef ref={refDiv} setSize={setSize} token={token} chats={chats} contacts={contacts} portals={portals} userUid={userUid} sendMessage={sendMessage} handleSearchChat={handleSearchChat} />
         {/* <span className="asd-bg-white asd-p-1 asd-rounded-lg asd-absolute md:asd-translate-y-[-50px]"> */}
         {/* {`${message} ${size?.contentWidth} * ${size?.contentHeight}`} */}
         {/* </span> */}
@@ -111,9 +111,10 @@ interface ComponenteRefProps extends Partial<HTMLDivElement> {
   portals: any
   userUid: string
   sendMessage: any
+  handleSearchChat: any
 }
 
-const ComponenteRef: FC<ComponenteRefProps> = forwardRef(({ setSize, token, chats, contacts, portals, userUid, sendMessage }, ref: any) => {
+const ComponenteRef: FC<ComponenteRefProps> = forwardRef(({ setSize, token, chats, contacts, portals, userUid, sendMessage, handleSearchChat }, ref: any) => {
   const { contentWidth, contentHeight, dispatch: chatContextDispatch } = useContext(StateChatContext);
   const { dispatch: socketContextDispach } = useContext(StateSocketContext);
 
@@ -147,10 +148,15 @@ const ComponenteRef: FC<ComponenteRefProps> = forwardRef(({ setSize, token, chat
   }, [chats])
   useEffect(() => {
     if (ref.current) {
-      console.log(0.0001, sendMessage)
       chatContextDispatch({ set: typeSetChatContext.sendMessage, value: sendMessage })
     }
   }, [sendMessage])
+
+  useEffect(() => {
+    if (ref.current) {
+      chatContextDispatch({ set: typeSetChatContext.handleSearchChat, value: handleSearchChat })
+    }
+  }, [handleSearchChat])
 
   useEffect(() => {
     setSize({ contentWidth, contentHeight })

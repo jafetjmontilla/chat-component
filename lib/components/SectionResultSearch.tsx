@@ -1,9 +1,10 @@
 import React, { FC, useContext, useEffect, useState } from "react";
-import { StateChatContext } from "../context/ChatContext";
+import { StateChatContext, typeSetChatContext } from "../context/ChatContext";
+import { Chat } from "./App.types";
 import { Contact } from "./Contact";
 
 export const SectionResultSearch: FC = () => {
-  const { contentWidth } = useContext(StateChatContext);
+  const { contentWidth, resultSearchChat, dispatch } = useContext(StateChatContext);
   const [show, setShow] = useState(false)
 
   useEffect(() => {
@@ -11,6 +12,11 @@ export const SectionResultSearch: FC = () => {
       setShow(true)
     }, 50);
   }, [])
+
+  const handle = (value: Chat) => {
+    dispatch({ set: typeSetChatContext.SectionChatShow, value: true })
+    dispatch({ set: typeSetChatContext.chat, value: value })
+  }
 
   const transitionVisibilite = {
     transition: `opacity 0.4s`,
@@ -23,8 +29,21 @@ export const SectionResultSearch: FC = () => {
 
   return (
     <>
-      <div style={show ? transitionVisibilite : transitionInVisibilite} className={`asd-bg-white asd-absolute asd-z-50 asd-flex asd-flex-col asd-overflow-y-scroll asd-w-full asd-h-full asd-border-r-4 asd-border-l-4 asd-border-gray-100 sizeSections${contentWidth} @md:!asd-w-[340px]`}>
-        resultado busqueda
+      <div style={show ? transitionVisibilite : transitionInVisibilite} className={`asd-bg-white asd-absolute asd-z-10 asd-flex asd-flex-col asd-overflow-y-scroll asd-w-full asd-h-full asd-border-r-4 asd-border-l-4 asd-border-gray-100 sizeSections${contentWidth} @md:!asd-w-[340px]`}>
+        <span>{`Encontrados: ${resultSearchChat?.total ? `${resultSearchChat?.total} chats` : ""}`}</span>
+        {resultSearchChat?.results?.map((elem: Chat, idx: number) => {
+          return (
+            <Contact
+              key={idx}
+              _id={elem?._id}
+              info={elem?.messages[elem?.messages?.length - 1].message}
+              image={elem?.photoURL?.split(":")[0] == "https" ? elem?.photoURL : `https://api.bodasdehoy.com${elem?.photoURL}`}
+              name={elem?.title}
+              onLine={elem?.onLine?.status}
+              onClick={() => { handle(elem) }}
+            />
+          )
+        })}
       </div>
     </>
   );

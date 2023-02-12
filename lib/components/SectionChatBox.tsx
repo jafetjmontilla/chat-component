@@ -43,7 +43,7 @@ export const SectionChatBox: FC<sectionChatBoxProps> = () => {
         !SectionInfoShow ?
           contentWidth > 768 ? transitionSizeMax : SectionChatShow && show ? transitionRightOpen : transitionRightClose
           : contentWidth > 768 ? transitionSizeMin : { transform: `translateY(-${topBarSizeY}px)` }
-      } className={`${contentWidth > 768 ? `asd-relative sizeSections${contentWidth}` : `asd-fixed asd-z-10 sizeContainer${contentWidth}`} asd-bg-gray-white asd-flex asd-flex-col`}>
+      } className={`${contentWidth > 768 ? `asd-relative sizeSections${contentWidth}` : `asd-fixed asd-z-20 sizeContainer${contentWidth}`} asd-bg-gray-white asd-flex asd-flex-col`}>
         <HeaderChat />
         <Conversation />
         <SendMessage />
