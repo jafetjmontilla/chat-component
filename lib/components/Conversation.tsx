@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react"
+import React, { useContext, useEffect, useRef, useState } from "react"
 import { StateChatContext } from "../context";
 import { getDate, getHour } from "../Util/FormatTime"
 import { MessageChat } from "./App.types";
@@ -9,8 +9,9 @@ interface ChatReduce extends MessageChat {
 }
 
 export const Conversation = () => {
-    const { chat, userUid } = useContext(StateChatContext);
+    const { chat } = useContext(StateChatContext);
     const [chatReduce, setChatReduce] = useState<ChatReduce[]>([])
+    const refDiv = useRef(null)
     useEffect(() => {
         let valirBandera: string | null = null
         const chatReduce: ChatReduce[] = chat?.messages.reduce((acc: any, item: MessageChat) => {
@@ -24,12 +25,11 @@ export const Conversation = () => {
             return acc;
         }, []);
         setChatReduce(chatReduce)
-        console.log(chatReduce)
-
-
-        document.getElementById('final')?.scrollIntoView(true)
+        console.log("creaado div")
+        setTimeout(() => {
+            document.getElementById('final')?.scrollIntoView(true)
+        }, 200);
     }, [chat?.messages])
-
 
 
 
@@ -40,10 +40,10 @@ export const Conversation = () => {
                     return (
                         <>{
                             elem?.bandera ?
-                                <div className="flex justify-center">
+                                <div key={idx} className="flex justify-center">
                                     <span className="asd-bg-gray-100 asd-text-gray-700 asd-text-[10px] asd-p-1 asd-rounded-full">{elem?.bandera}</span>
                                 </div> :
-                                <ItemMessage type={elem?.type} emisor={userUid == elem?.emitUserUid} message={elem?.message} date={getHour(elem?.createdAt)} />
+                                <ItemMessage key={idx} message={elem} />
                         }</>
                     )
                 })}

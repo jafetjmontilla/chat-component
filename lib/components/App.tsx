@@ -120,7 +120,7 @@ const ComponenteRef: FC<ComponenteRefProps> = forwardRef(({ setSize, token, chat
 
 
   useEffect(() => {
-    console.log("chats", chats)
+    console.log("chats cambio", chats)
   }, [chats])
   useEffect(() => {
     console.log("contacts", contacts)

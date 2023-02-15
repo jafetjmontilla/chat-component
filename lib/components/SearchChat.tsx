@@ -1,4 +1,4 @@
-import React, { Dispatch, FC, SetStateAction, useContext, useEffect, useState } from "react";
+import React, { ChangeEvent, Dispatch, FC, SetStateAction, useContext, useEffect, useState } from "react";
 import { StateChatContext, typeSetChatContext } from "../context";
 import { ArrowLeft, Close, SearchIcon } from "../icons";
 import { ContainerIcon } from "./ContainerIcon";
@@ -8,13 +8,20 @@ interface propsSearchChat {
 }
 
 export const SearchChat: FC<propsSearchChat> = ({ handleSearchChat, }) => {
-  const { activeSearch, dispatch } = useContext(StateChatContext);
+  const { chats, activeSearch, dispatch } = useContext(StateChatContext);
   const [value, setValue] = useState("");
 
-  const handleChange = async (e: any) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
-    const resultSearchChat = await handleSearchChat(e.target.value)
-    dispatch({ set: typeSetChatContext.resultSearchChat, value: resultSearchChat })
+    const resultFiltered = chats?.results?.filter(element => {
+      return element?.title?.toLowerCase()?.includes(e.target.value?.toLowerCase()
+      )
+    })
+    const resp = {
+      results: resultFiltered,
+      total: resultFiltered?.length
+    }
+    dispatch({ set: typeSetChatContext.resultSearchChat, value: resp })
   };
   const handleClearSearch = async (e: any) => {
     setValue("");

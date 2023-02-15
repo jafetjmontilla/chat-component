@@ -24,6 +24,7 @@ export const SendMessage: FC<propsSendMessage> = () => {
   }
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value)
+    console.log(444, e.target.value)
   }
   const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
