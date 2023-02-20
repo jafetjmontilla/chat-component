@@ -2,7 +2,7 @@ import { Dispatch } from "react"
 
 export interface AppProps extends Partial<HTMLDivElement> {
   userUid: string
-  message: string
+  label: string
   token: string
   theme: ThemeChat
   notifications: Notification[]
@@ -14,7 +14,7 @@ export interface AppProps extends Partial<HTMLDivElement> {
     total: number
   },
   sendMessage: Dispatch<SendMessage>
-  handleSearchChat: Dispatch<any>
+  getScraperMetaData: Dispatch<any>
 }
 
 
@@ -121,6 +121,6 @@ export interface Image {
 
 export interface SendMessage {
   chat: Chat | null
-  message: string
+  message: any
   type: string
 }

@@ -6,11 +6,6 @@ import { Sections } from "./Sections";
 import { TopBar } from "./TopBar";
 import { AppProps, ResultChats } from "./App.types";
 
-// export interface AppProps extends Partial<HTMLDivElement> {
-//   message: string
-//   token: string
-// }
-
 interface typeSizeContent {
   contentWidth: number | undefined,
   contentHeight: number | undefined,
@@ -21,7 +16,7 @@ export interface typeSize {
   Y: number | undefined,
 }
 
-export const App: FC<AppProps> = ({ message, token, theme, chats, contacts, events: portals, userUid, sendMessage, handleSearchChat }) => {
+export const App: FC<AppProps> = ({ label, token, theme, chats, contacts, events: portals, userUid, sendMessage, getScraperMetaData }) => {
   const refDiv = useRef<RefObject<HTMLDivElement>>(null)
   const refScroll = useRef<any>(null)
   const [size, setSize] = useState<typeSizeContent>()
@@ -75,9 +70,9 @@ export const App: FC<AppProps> = ({ message, token, theme, chats, contacts, even
   return (
     <>
       <DefaultLayout>
-        <ComponenteRef ref={refDiv} setSize={setSize} token={token} chats={chats} contacts={contacts} portals={portals} userUid={userUid} sendMessage={sendMessage} handleSearchChat={handleSearchChat} />
+        <ComponenteRef ref={refDiv} setSize={setSize} token={token} chats={chats} contacts={contacts} portals={portals} userUid={userUid} sendMessage={sendMessage} getScraperMetaData={getScraperMetaData} />
         {/* <span className="asd-bg-white asd-p-1 asd-rounded-lg asd-absolute md:asd-translate-y-[-50px]"> */}
-        {/* {`${message} ${size?.contentWidth} * ${size?.contentHeight}`} */}
+        {/* {`${label} ${size?.contentWidth} * ${size?.contentHeight}`} */}
         {/* </span> */}
         {/* <p className="asd-absolute asd-z-40 asd-translate-x-32 asd-translate-y-96">{`${scrollPosition} ${status} ${size?.contentHeight} ${virtualKeyboard}`}</p> */}
         <div ref={refScroll} className={`asd-@container asd-flex asd-flex-col asd-bg-orange-500 asd-md:bg-orange-500 asd-sizeContainer${size?.contentWidth}`}>
@@ -111,10 +106,10 @@ interface ComponenteRefProps extends Partial<HTMLDivElement> {
   portals: any
   userUid: string
   sendMessage: any
-  handleSearchChat: any
+  getScraperMetaData: any
 }
 
-const ComponenteRef: FC<ComponenteRefProps> = forwardRef(({ setSize, token, chats, contacts, portals, userUid, sendMessage, handleSearchChat }, ref: any) => {
+const ComponenteRef: FC<ComponenteRefProps> = forwardRef(({ setSize, token, chats, contacts, portals, userUid, sendMessage, getScraperMetaData }, ref: any) => {
   const { contentWidth, contentHeight, dispatch: chatContextDispatch } = useContext(StateChatContext);
   const { dispatch: socketContextDispach } = useContext(StateSocketContext);
 
@@ -154,9 +149,9 @@ const ComponenteRef: FC<ComponenteRefProps> = forwardRef(({ setSize, token, chat
 
   useEffect(() => {
     if (ref.current) {
-      chatContextDispatch({ set: typeSetChatContext.handleSearchChat, value: handleSearchChat })
+      chatContextDispatch({ set: typeSetChatContext.getScraperMetaData, value: getScraperMetaData })
     }
-  }, [handleSearchChat])
+  }, [getScraperMetaData])
 
   useEffect(() => {
     setSize({ contentWidth, contentHeight })

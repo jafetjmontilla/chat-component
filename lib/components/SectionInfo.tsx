@@ -32,7 +32,6 @@ export const SectionInfo: FC = () => {
   return (
     <>
       <div style={showInfo ? transitionVisibilite : transitionInVisibilite} className={`${contentWidth < 769 && "asd-absolute asd-z-30"} asd-bg-white asd-flex asd-flex-col asd-border-l-4 asd-border-gray-100 sizeSections${contentWidth} @md:!asd-w-[300px]`}>
-        <button onClick={() => { sendMessage({ chat: chat, message: "fgsd", type: "text" }) }}>PRUEBA</button>
         <button onClick={handleClick}>cerrar info</button>
       </div>
     </>

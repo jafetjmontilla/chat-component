@@ -25,7 +25,6 @@ export const Conversation = () => {
             return acc;
         }, []);
         setChatReduce(chatReduce)
-        console.log("creaado div")
         setTimeout(() => {
             document.getElementById('final')?.scrollIntoView(true)
         }, 200);
@@ -38,13 +37,15 @@ export const Conversation = () => {
             <div className="asd-bg-white asd-flex asd-flex-col asd-w-full asd-h-full asd-overflow-y-scroll">
                 {chatReduce?.map((elem: any, idx: number) => {
                     return (
-                        <>{
-                            elem?.bandera ?
-                                <div key={idx} className="flex justify-center">
-                                    <span className="asd-bg-gray-100 asd-text-gray-700 asd-text-[10px] asd-p-1 asd-rounded-full">{elem?.bandera}</span>
-                                </div> :
-                                <ItemMessage key={idx} message={elem} />
-                        }</>
+                        <div key={idx}>
+                            {
+                                elem?.bandera ?
+                                    <div className="flex justify-center">
+                                        <span className="asd-bg-gray-100 asd-text-gray-700 asd-text-[10px] asd-p-1 asd-rounded-full">{elem?.bandera}</span>
+                                    </div> :
+                                    <ItemMessage message={elem} />
+                            }
+                        </div>
                     )
                 })}
                 <div>

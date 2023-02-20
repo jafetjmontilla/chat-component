@@ -18,7 +18,7 @@ interface StateProps {
   chat: Chat | null
   userUid: string
   sendMessage: Dispatch<SendMessage>
-  handleSearchChat: Dispatch<any>
+  getScraperMetaData: Dispatch<any>
   resultSearchChat: ResultChats | undefined
 }
 
@@ -44,7 +44,7 @@ const InitialValues: Context = {
   chat: null,
   userUid: "",
   sendMessage: () => { },
-  handleSearchChat: () => { },
+  getScraperMetaData: () => { },
   resultSearchChat: undefined
 }
 
@@ -65,8 +65,8 @@ export enum typeSetChatContext {
   chat = "chat",
   userUid = "userUid",
   sendMessage = "sendMessage",
-  handleSearchChat = "handleSearchChat",
-  resultSearchChat = "resultSearchChat"
+  resultSearchChat = "resultSearchChat",
+  getScraperMetaData = "getScraperMetaData"
 }
 
 interface typeDispatch {

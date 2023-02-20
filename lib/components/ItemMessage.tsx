@@ -45,18 +45,13 @@ export const ItemMessage: FC<propsMessage> = ({ message }) => {
   const [singleMultimedia, setSingleMultimedia] = useState(!message.message);
   const [linkUrl, setLinkUrl] = useState(true);
 
-  const transform = (node: HTMLElement, children: Node[]): React.ReactNode => {
-    console.log(8877, node.tagName)
-    if (node.tagName === 'a') {
-      return <Link href={"/"}  >{children}</Link>;
-    }
-  }
 
   useEffect(() => {
     if (message?.image) {
       const myImage = new Image()
       myImage.src = message?.image ?? ""
-      imgRef.current?.appendChild(myImage)
+      imgRef.current?.children.length == 0 && imgRef.current?.appendChild(myImage)
+      //imgRef.current?.appendChild(myImage)
       setTimeout(() => {
         const x: number | undefined = imgRef.current?.clientWidth
         const y: number | undefined = imgRef.current?.clientHeight

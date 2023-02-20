@@ -3,11 +3,7 @@ import { StateChatContext, typeSetChatContext } from "../context";
 import { ArrowLeft, Close, SearchIcon } from "../icons";
 import { ContainerIcon } from "./ContainerIcon";
 
-interface propsSearchChat {
-  handleSearchChat: Dispatch<any>
-}
-
-export const SearchChat: FC<propsSearchChat> = ({ handleSearchChat, }) => {
+export const SearchChat: FC = () => {
   const { chats, activeSearch, dispatch } = useContext(StateChatContext);
   const [value, setValue] = useState("");
 
