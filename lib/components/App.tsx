@@ -1,5 +1,5 @@
 import React, { Dispatch, FC, forwardRef, LegacyRef, RefObject, SetStateAction, useContext, useEffect, useRef, useState } from "react";
-import { StateChatContext, StateSocketContext, typeSetChatContext } from "../context";
+import { StateChatContext, typeSetChatContext } from "../context";
 import DefaultLayout from "../layouts/DefaultLayout";
 import "../styles.css";
 import { Sections } from "./Sections";
@@ -110,8 +110,7 @@ interface ComponenteRefProps extends Partial<HTMLDivElement> {
 }
 
 const ComponenteRef: FC<ComponenteRefProps> = forwardRef(({ setSize, token, chats, contacts, portals, userUid, sendMessage, getScraperMetaData }, ref: any) => {
-  const { contentWidth, contentHeight, dispatch: chatContextDispatch } = useContext(StateChatContext);
-  const { dispatch: socketContextDispach } = useContext(StateSocketContext);
+  const { contentWidth, contentHeight, dispatch } = useContext(StateChatContext);
 
 
   useEffect(() => {
@@ -127,29 +126,29 @@ const ComponenteRef: FC<ComponenteRefProps> = forwardRef(({ setSize, token, chat
 
   useEffect(() => {
     if (ref.current) {
-      chatContextDispatch({ set: typeSetChatContext.contentWidth, value: ref.current?.parentElement?.clientWidth })
-      chatContextDispatch({ set: typeSetChatContext.contentHeight, value: ref.current?.parentElement?.clientHeight })
-      chatContextDispatch({ set: typeSetChatContext.topBarSizeY, value: 42 })
-      chatContextDispatch({ set: typeSetChatContext.contacts, value: contacts })
-      chatContextDispatch({ set: typeSetChatContext.portals, value: portals })
-      chatContextDispatch({ set: typeSetChatContext.userUid, value: userUid })
+      dispatch({ set: typeSetChatContext.contentWidth, value: ref.current?.parentElement?.clientWidth })
+      dispatch({ set: typeSetChatContext.contentHeight, value: ref.current?.parentElement?.clientHeight })
+      dispatch({ set: typeSetChatContext.topBarSizeY, value: 42 })
+      dispatch({ set: typeSetChatContext.contacts, value: contacts })
+      dispatch({ set: typeSetChatContext.portals, value: portals })
+      dispatch({ set: typeSetChatContext.userUid, value: userUid })
     }
   }, [ref, contacts, portals, userUid])
   useEffect(() => {
     if (ref.current) {
       //chats.results.sort(((a, b) => b.updatedAt - a.updatedAt))
-      chatContextDispatch({ set: typeSetChatContext.chats, value: chats })
+      dispatch({ set: typeSetChatContext.chats, value: chats })
     }
   }, [chats])
   useEffect(() => {
     if (ref.current) {
-      chatContextDispatch({ set: typeSetChatContext.sendMessage, value: sendMessage })
+      dispatch({ set: typeSetChatContext.sendMessage, value: sendMessage })
     }
   }, [sendMessage])
 
   useEffect(() => {
     if (ref.current) {
-      chatContextDispatch({ set: typeSetChatContext.getScraperMetaData, value: getScraperMetaData })
+      dispatch({ set: typeSetChatContext.getScraperMetaData, value: getScraperMetaData })
     }
   }, [getScraperMetaData])
 
