@@ -1,5 +1,8 @@
 import React, { FC, useContext, useEffect, useState } from "react";
 import { StateChatContext, typeSetChatContext } from "../context/ChatContext";
+import { ArrowLeft, Close } from "../icons";
+import { CircleImage } from "./CircleImage";
+import { ContainerIcon } from "./ContainerIcon";
 
 export const SectionInfo: FC = () => {
   const { contentWidth, topBarSizeY, chat, sendMessage, dispatch } = useContext(StateChatContext);
@@ -11,7 +14,7 @@ export const SectionInfo: FC = () => {
     }, 50);
   }, [])
 
-  const handleClick: React.MouseEventHandler<HTMLButtonElement> = () => {
+  const handleClick = () => {
     setShowInfo(false)
     setTimeout(() => {
       dispatch({ set: typeSetChatContext.SectionInfoShow, value: false })
@@ -31,8 +34,19 @@ export const SectionInfo: FC = () => {
 
   return (
     <>
-      <div style={showInfo ? transitionVisibilite : transitionInVisibilite} className={`${contentWidth < 769 && "asd-absolute asd-z-30"} asd-bg-white asd-flex asd-flex-col asd-border-l-4 asd-border-gray-100 sizeSections${contentWidth} @md:!asd-w-[300px]`}>
-        <button onClick={handleClick}>cerrar info</button>
+      <div style={showInfo ? transitionVisibilite : transitionInVisibilite} className={`${contentWidth < 769 && "asd-absolute asd-z-50"} asd-bg-gray-200 asd-flex asd-flex-col ${contentWidth < 769 ? `sizeContainer${contentWidth}` : `sizeSections${contentWidth}`} @md:!asd-w-[360px]`}>
+        <ContainerIcon className="asd-absolute asd-pl-1 asd-pt-3" onClick={handleClick}>
+          {contentWidth < 769 ? <ArrowLeft className="asd-w-6 asd-h-6" /> : <Close className="asd-w-6 asd-h-6" />}
+        </ContainerIcon>
+        <div className="asd-bg-white asd-flex asd-flex-col asd-items-center asd-w-full asd-p-4">
+          <CircleImage
+            image={chat?.photoURL?.split(":")[0] == "https" ? chat?.photoURL : `https://api.bodasdehoy.com${chat?.photoURL}`}
+            name={chat?.title ? chat?.title : ""}
+            onLine={chat?.onLine?.status}
+            classNameOnlySize={"asd-w-40 asd-h-40"}
+          />
+          <span >{chat?.title}</span>
+        </div>
       </div>
     </>
   );

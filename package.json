@@ -1,10 +1,10 @@
 {
-  "name": "component-library-tailwind-starter",
+  "name": "chat-component",
   "version": "0.1.0",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
   "src": "lib/index.js",
-  "repository": "https://github.com/kokiebisu/component-library-tailwind-starter.git",
+  "repository": "https://github.com/febmerlib/chat-component.git",
   "author": "Jafet Montilla <jafetmontilla@gmail.com>",
   "license": "MIT",
   "dependencies": {

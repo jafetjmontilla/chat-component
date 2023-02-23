@@ -16,7 +16,7 @@ export interface typeSize {
   Y: number | undefined,
 }
 
-export const App: FC<AppProps> = ({ label, token, theme, chats, contacts, events: portals, userUid, sendMessage, getScraperMetaData }) => {
+export const App: FC<AppProps> = ({ label, token, theme, chats, contacts, events: portals, userUid, sendMessage, getScraperMetaData, elementLogo, elementPerfil }) => {
   const refDiv = useRef<RefObject<HTMLDivElement>>(null)
   const refScroll = useRef<any>(null)
   const [size, setSize] = useState<typeSizeContent>()
@@ -76,7 +76,7 @@ export const App: FC<AppProps> = ({ label, token, theme, chats, contacts, events
         {/* </span> */}
         {/* <p className="asd-absolute asd-z-40 asd-translate-x-32 asd-translate-y-96">{`${scrollPosition} ${status} ${size?.contentHeight} ${virtualKeyboard}`}</p> */}
         <div ref={refScroll} className={`asd-@container asd-flex asd-flex-col asd-bg-orange-500 asd-md:bg-orange-500 asd-sizeContainer${size?.contentWidth}`}>
-          <TopBar />
+          <TopBar logo={elementLogo} perfil={elementPerfil} />
           <Sections />
         </div>
       </DefaultLayout>

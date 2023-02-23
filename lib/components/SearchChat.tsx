@@ -37,8 +37,8 @@ export const SearchChat: FC = () => {
 
   return (
     <>
-      <div className="asd-h-10 asd-flex asd-w-full asd-pl-2 asd-pr-2 asd-items-center asd-justify-start">
-        <div className="asd-bg-white asd-flex asd-items-center asd-justify-start asd-w-full asd-rounded-full @md:asd-w-[306px]">
+      <div className="asd-h-10 asd-flex asd-w-full @md:asd-w-[340px] asd-pl-2 asd-pr-2 asd-items-center asd-justify-center">
+        <div className="asd-bg-white asd-flex asd-items-center asd-justify-start asd-w-full asd-rounded-full @md:asd-w-[316px]">
           <ContainerIcon onClick={handleClick} className="asd-w-8">
             {!activeSearch ? <SearchIcon className="asd-w-4 asd-h-4" /> : <ArrowLeft className="asd-w-6 asd-h-6" />}
           </ContainerIcon>

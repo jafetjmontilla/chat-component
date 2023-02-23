@@ -4,9 +4,9 @@ import { CircleImage } from './CircleImage'
 
 interface propsItem {
   image: any | undefined | null
-  name: String
+  name: string
   info: any
-  _id: String
+  _id: string
   onLine?: boolean
 }
 
