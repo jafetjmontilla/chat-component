@@ -16,9 +16,10 @@ export const HeaderChat: FC = () => {
   return (
     <div className="asd-bg-gray-100 asd-z-30 asd-w-full asd-h-16 asd-flex asd-items-center asd-border-b-2 asd-border-gray-200 asd-shadow-md">
       {contentWidth < 769 &&
-        <ContainerIcon onClick={handleChatShow}>
+        <ContainerIcon onClick={handleChatShow} className={"asd-ml-2"}>
           <ArrowLeft className="asd-w-6 asd-h-6" />
-        </ContainerIcon >}
+        </ContainerIcon >
+      }
       <Contact
         key={chat?._id}
         _id={chat?._id ? chat?._id : ""}

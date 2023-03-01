@@ -55,13 +55,13 @@ export const SectionSwiper: FC<sectionSwiperProps> = () => {
     <>
       <div style={contentWidth < 769 ?
         SectionChatShow ? transitionLeftclose : transitionLeftOpen
-        : {}} className={`asd-bg-blue-100 asd-relative asd-flex asd-flex-col sizeSections${contentWidth} @md:!asd-w-[340px] asd-border-r-4 asd-border-l-4 asd-border-gray-100 qwe`}>
+        : {}} className={`asd-relative asd-flex asd-flex-col sizeSections${contentWidth} @md:!asd-w-[340px] asd-border-r-4 asd-border-l-4 asd-border-gray-100 qwe`}>
         {contacts?.total && contacts?.total > 0 ? <div className="asd-flex asd-h-[5%]">
           <Button className={`${classNameButton} ${page == 0 && "asd-opacity-80"}`} onClick={() => { setPage(0) }} title="Chats" />
           <Button className={`${classNameButton} ${page == 1 && "asd-opacity-80"}`} onClick={() => { setPage(1) }} title="Contactos" />
           {portals?.total && portals?.total > 0 && <Button className={`${classNameButton} ${page == 2 && "asd-opacity-80"}`} onClick={() => { setPage(2) }} title="Portales" />}
         </div> : <></>}
-        <Swiper key={1} className={`asd-bg-blue-900 asd-w-[100%] ${contacts?.total && contacts?.total > 0 ? "asd-h-[95%]" : "asd-h-[100%]"}`}
+        <Swiper key={1} className={`asd-w-[100%] ${contacts?.total && contacts?.total > 0 ? "asd-h-[95%]" : "asd-h-[100%]"}`}
           preloadImages={false}
           lazy={true}
           scrollbar={{
@@ -70,18 +70,17 @@ export const SectionSwiper: FC<sectionSwiperProps> = () => {
           modules={[Pagination, Scrollbar]}
         >
           <SlideTo page={page} setPage={setPage} />
-          <SwiperSlide className="asd-bg-green-100 asd-pb-3 asd-overscroll-contain" onScroll={() => { }}>
-            {contentWidth < 769 && chats?.total == 0 && <button onClick={handleChatShow}>ir a chat</button>}
+          <SwiperSlide className="asd-pb-3 asd-overscroll-contain" onScroll={() => { }}>
             <div>
               <SectionChats />
             </div>
           </SwiperSlide>
-          {contacts?.total && contacts?.total > 0 && <SwiperSlide className="asd-bg-green-300 asd-pb-3 asd-overscroll-contain">
+          {contacts?.total && contacts?.total > 0 && <SwiperSlide className="asd-pb-3 asd-overscroll-contain">
             <div>
               <SectionContacs setPage={setPage} />
             </div>
           </SwiperSlide>}
-          {portals?.total && portals?.total > 0 && <SwiperSlide className="asd-bg-green-600 asd-pb-3 asd-overscroll-contain">
+          {portals?.total && portals?.total > 0 && <SwiperSlide className="asd-pb-3 asd-overscroll-contain">
             <div>
               <SectionPortals />
             </div>

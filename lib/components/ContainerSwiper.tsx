@@ -5,7 +5,7 @@ export const ContainerSwiper: FC<{ children: ReactNode }> = ({ children }) => {
   const { contentWidth } = useContext(StateChatContext);
   return (
     <>
-      <div className={`asd-bg-white asd-flex asd-flex-col asd-overflow-y-scroll asd-w-full asd-h-full sizeSections${contentWidth} @md:!asd-w-[340px]`}>
+      <div className={`asd-bg-white asd-mt-2 -asd-mb-2 asd-flex asd-flex-col asd-overflow-y-scroll asd-w-full asd-h-full sizeSections${contentWidth} @md:!asd-w-[340px]`}>
         {children}
       </div>
     </>

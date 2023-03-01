@@ -17,6 +17,7 @@ export interface AppProps extends Partial<HTMLDivElement> {
   getScraperMetaData: Dispatch<any>
   elementLogo?: JSX.Element
   elementPerfil?: JSX.Element
+  elementNotifications?: JSX.Element
 }
 
 
