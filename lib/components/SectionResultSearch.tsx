@@ -29,7 +29,7 @@ export const SectionResultSearch: FC = () => {
 
   return (
     <>
-      <div style={show ? transitionVisibilite : transitionInVisibilite} className={`asd-bg-white asd-absolute asd-z-10 asd-flex asd-flex-col asd-overflow-y-scroll asd-w-full asd-h-full asd-border-r-4 asd-border-l-4 asd-border-gray-100 sizeSections${contentWidth} @md:!asd-w-[340px]`}>
+      <div style={show ? transitionVisibilite : transitionInVisibilite} className={`asd-bg-white asd-absolute asd-z-10 asd-flex asd-flex-col asd-overflow-y-scroll asd-w-full asd-h-full asd-box-border asd-border-r-4 asd-border-l-4* asd-border-gray-100 sizeSections${contentWidth} @md:!asd-w-[340px]`}>
         <span>{`Encontrados: ${resultSearchChat?.total ? `${resultSearchChat?.total} chats` : ""}`}</span>
         {resultSearchChat?.results?.map((elem: Chat, idx: number) => {
           return (

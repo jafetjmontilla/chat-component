@@ -7,7 +7,9 @@ import 'swiper/css';
 import "swiper/css/bundle";
 import { SectionChats } from "./SectionChats";
 import { SectionContacs } from "./SectionContacts";
-import { SectionPortals } from "./SectionPortals";
+import { SectionEvents } from "./SectionEvents";
+import { SearchChat } from "./SearchChat";
+import { SectionResultSearch } from "./SectionResultSearch";
 
 interface slidetoProps {
   page: number
@@ -22,7 +24,7 @@ const SlideTo: FC<slidetoProps> = ({ page, setPage }) => {
     setPage(idx.activeIndex)
   });
   useEffect(() => {
-    if (swiper.enabled) {
+    if (swiper) {
       swiper.slideTo(page)
     }
   }, [page, swiper])
@@ -33,14 +35,15 @@ const SlideTo: FC<slidetoProps> = ({ page, setPage }) => {
 interface sectionSwiperProps {
 }
 export const SectionSwiper: FC<sectionSwiperProps> = () => {
-  const { contentWidth, SectionChatShow, dispatch, chats, contacts, portals } = useContext(StateChatContext);
+  const { contentWidth, SectionChatShow, dispatch, chats, contacts, events, activeSearch, theme } = useContext(StateChatContext);
   const [page, setPage] = useState(0)
+  const [title, setTitle] = useState<string>("Chats")
   const [chatId, setChatId] = useState(null)
   const [contactUid, setContactUid] = useState(null)
   const handleChatShow = () => {
     dispatch({ set: typeSetChatContext.SectionChatShow, value: true })
   }
-  const classNameButton = `asd-flex asd-bg-primary asd-text-white asd-text-sm asd-transition asd-justify-center asd-items-center hover:asd-opacity-70 ${portals?.total && portals?.total > 0 ? "asd-w-1/3 " : "asd-w-1/2"}`
+  const classNameButton = `asd-flex asd-bg-primary asd-text-white asd-text-sm asd-transition asd-justify-center asd-items-center hover:asd-opacity-70 ${events?.total && events?.total > 0 ? "asd-w-1/3 " : "asd-w-1/2"}`
 
   const transitionLeftclose = {
     transition: `width 0.8s 0.1s`,
@@ -53,43 +56,53 @@ export const SectionSwiper: FC<sectionSwiperProps> = () => {
 
   return (
     <>
-      <div style={contentWidth < 769 ?
-        SectionChatShow ? transitionLeftclose : transitionLeftOpen
-        : {}} className={`asd-relative asd-flex asd-flex-col sizeSections${contentWidth} @md:!asd-w-[340px] asd-border-r-4 asd-border-l-4 asd-border-gray-100 qwe`}>
-        {contacts?.total && contacts?.total > 0 ? <div className="asd-flex asd-h-[5%]">
-          <Button className={`${classNameButton} ${page == 0 && "asd-opacity-80"}`} onClick={() => { setPage(0) }} title="Chats" />
-          <Button className={`${classNameButton} ${page == 1 && "asd-opacity-80"}`} onClick={() => { setPage(1) }} title="Contactos" />
-          {portals?.total && portals?.total > 0 && <Button className={`${classNameButton} ${page == 2 && "asd-opacity-80"}`} onClick={() => { setPage(2) }} title="Portales" />}
-        </div> : <></>}
-        <Swiper key={1} className={`asd-w-[100%] ${contacts?.total && contacts?.total > 0 ? "asd-h-[95%]" : "asd-h-[100%]"}`}
-          preloadImages={false}
-          lazy={true}
-          scrollbar={{
-            hide: false, dragClass: 'swiper-scrollbar-drag-modified', horizontalClass: 'swiper-scrollbar-horizontal-modified'
-          }}
-          modules={[Pagination, Scrollbar]}
-        >
-          <SlideTo page={page} setPage={setPage} />
-          <SwiperSlide className="asd-pb-3 asd-overscroll-contain" onScroll={() => { }}>
-            <div>
-              <SectionChats />
-            </div>
-          </SwiperSlide>
-          {contacts?.total && contacts?.total > 0 && <SwiperSlide className="asd-pb-3 asd-overscroll-contain">
-            <div>
-              <SectionContacs setPage={setPage} />
-            </div>
-          </SwiperSlide>}
-          {portals?.total && portals?.total > 0 && <SwiperSlide className="asd-pb-3 asd-overscroll-contain">
-            <div>
-              <SectionPortals />
-            </div>
-          </SwiperSlide>}
-        </Swiper>
+      <div style={contentWidth < 769 ? SectionChatShow ? transitionLeftclose : transitionLeftOpen : {}}
+
+        className={`asd-bg-gray-200 asd-relative asd-flex asd-flex-col sizeSections${contentWidth} asd-h-full @md:!asd-w-[340px] asd-border-r-4 asd-border-gray-100 TextSizeAdjustNone`}>
+        <SearchChat title={title} />
+        <div className="asd-w-full asd-h-full asd-flex asd-flex-col asd-relative">
+          {activeSearch && <SectionResultSearch />}
+          {contacts?.total && contacts?.total > 0 ? <div className="asd-flex asd-h-9 @md:asd-h-6">
+            <Button className={`${classNameButton} ${page == 0 && "asd-opacity-80"}`} onClick={() => {
+              setPage(0)
+              setTitle("Chats")
+            }} title="Chats" />
+            <Button className={`${classNameButton} ${page == 1 && "asd-opacity-80"}`} onClick={() => {
+              setPage(1)
+              setTitle("Contactos")
+            }} title="Contactos" />
+            {events?.total && events?.total > 0 && <Button className={`${classNameButton} ${page == 2 && "asd-opacity-80"}`} onClick={() => {
+              setPage(2)
+              setTitle("Eventos")
+            }} title="Eventos" />}
+          </div> : <></>}
+          <div className="asd-h-[100%]">
+            <Swiper key={1} className={``}
+              preloadImages={false}
+              lazy={true}
+              scrollbar={{
+                hide: false, dragClass: 'swiper-scrollbar-drag-modified', horizontalClass: 'swiper-scrollbar-horizontal-modified'
+              }}
+              modules={[Pagination, Scrollbar]}
+              style={{ width: "100%", height: "100%" }}
+            >
+              <SlideTo page={page} setPage={setPage} />
+              <SwiperSlide className="asd-pb-3 asd-h-full" onScroll={() => { }}>
+                <SectionChats />
+              </SwiperSlide>
+              {contacts?.total && contacts?.total > 0 && <SwiperSlide className="asd-pb-3 asd-h-full">
+                <SectionContacs setPage={setPage} />
+              </SwiperSlide>}
+              {events?.total && events?.total > 0 && <SwiperSlide className="asd-pb-3 asd-h-full">
+                <SectionEvents />
+              </SwiperSlide>}
+            </Swiper>
+          </div>
+        </div>
       </div>
       <style >
         {`
-        .qwe {
+        .TextSizeAdjustNone {
           text-size-adjust: none;
         }
           .swiper-scrollbar-horizontal-modified {
@@ -97,14 +110,14 @@ export const SectionSwiper: FC<sectionSwiperProps> = () => {
             height: 5px !important;
             width: 100% !important;
             top: 0;
-            background: #f7628c;
+            background: ${theme.primaryColor};
             border-radius: 0px !important;
           }
           .swiper-scrollbar-drag-modified {
             height: 100%;
             width: 50%;
             position: relative;
-            background: hwb(343deg 64% 2%);
+            background: #f7628c;
             border-radius: 5px;
             left: 0;
             top: 0;

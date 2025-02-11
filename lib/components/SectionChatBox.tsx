@@ -40,10 +40,16 @@ export const SectionChatBox: FC<sectionChatBoxProps> = () => {
   return (
     <>
       <div ref={divRef} style={
-        !SectionInfoShow ?
-          contentWidth > 768 ? transitionSizeMax : SectionChatShow && show ? transitionRightOpen : transitionRightClose
-          : contentWidth > 768 ? transitionSizeMin : { transform: `translateY(-${topBarSizeY}px)` }
-      } className={`${contentWidth > 768 ? `asd-relative sizeSections${contentWidth}` : `asd-fixed asd-z-20 sizeContainer${contentWidth}`} asd-bg-gray-white asd-flex asd-flex-col`}>
+        !SectionInfoShow
+          ? contentWidth > 768
+            ? transitionSizeMax
+            : SectionChatShow && show
+              ? transitionRightOpen
+              : transitionRightClose
+          : contentWidth > 768
+            ? transitionSizeMin
+            : { transform: `translateY(-${topBarSizeY}px)` }
+      } className={`${contentWidth > 768 ? `asd-relative sizeSections${contentWidth}` : `asd-fixed asd-z-20 asd-w-[100vw]`} asd-bg-gray-white asd-flex asd-flex-col`}>
         <HeaderChat />
         <Conversation />
         <SendMessage />

@@ -34,7 +34,7 @@ export const SectionInfo: FC = () => {
 
   return (
     <>
-      <div style={showInfo ? transitionVisibilite : transitionInVisibilite} className={`${contentWidth < 769 && "asd-absolute asd-z-50"} asd-bg-gray-200 asd-flex asd-flex-col ${contentWidth < 769 ? `sizeContainer${contentWidth}` : `sizeSections${contentWidth}`} @md:!asd-w-[360px]`}>
+      <div style={showInfo ? transitionVisibilite : transitionInVisibilite} className={`${contentWidth < 769 && "asd-absolute asd-z-50"} asd-bg-gray-200 asd-flex asd-flex-col ${contentWidth < 769 ? `asd-w-[100vw]` : `asd-flex-1`} @md:!asd-w-[360px]`}>
         <ContainerIcon className="asd-absolute asd-pl-1 asd-pt-3" onClick={handleClick}>
           {contentWidth < 769 ? <ArrowLeft className="asd-w-6 asd-h-6" /> : <Close className="asd-w-6 asd-h-6" />}
         </ContainerIcon>

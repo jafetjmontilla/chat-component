@@ -5,6 +5,7 @@ import { SectionChats } from "./SectionChats";
 import { SectionInfo } from "./SectionInfo";
 import { SectionResultSearch } from "./SectionResultSearch";
 import { SectionSwiper } from "./SectionSwiper";
+import { SearchChat } from "./SearchChat";
 
 export const Sections: FC = () => {
   const { contentWidth, contentHeight, topBarSizeY, SectionChatBoxX, SectionInfoShow, SectionChatShow, activeSearch, chat, dispatch } = useContext(StateChatContext);
@@ -47,7 +48,7 @@ export const Sections: FC = () => {
 
   return (
     <>
-      <div className={`asd-bg-white asd-flex asd-sizeSections${contentWidth}`}>
+      <div className={`asd-bg-gray-100 asd-flex asd-h-full`}>
         {contentWidth < 769 &&
           !SectionInfoShow && <SectionSwiper />
         }
@@ -60,13 +61,9 @@ export const Sections: FC = () => {
         {contentWidth > 768 && <SectionSwiper />}
         {contentWidth > 768 && SectionChatShow && <SectionChatBox />}
         {contentWidth > 768 && SectionInfoShow && valirOpenInfo && <SectionInfo />}
-        {activeSearch && <SectionResultSearch />}
+        {/* {activeSearch && <SectionResultSearch />} */}
       </div>
       <style>{`
-      .sizeSections${contentWidth}{
-        width: ${contentWidth}px;
-        height: ${contentHeight - topBarSizeY}px;
-      }
       .sizeSectionChatBox${contentWidth}{
         width: ${SectionChatBoxX}px !important;
       }      

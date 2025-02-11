@@ -1,5 +1,5 @@
 import React, { createContext, Dispatch, FC, useReducer, Reducer, useEffect, HtmlHTMLAttributes, ReactNode } from "react";
-import { Chat, ResultChats, ResultContacts, ResultEvents, SendMessage } from "../components/App.types";
+import { Chat, ResultChats, ResultContacts, ResultEvents, SendMessage, ThemeChat } from "../components/App.types";
 
 interface StateProps {
   provider: any
@@ -14,12 +14,13 @@ interface StateProps {
   activeSearch: boolean
   chats: ResultChats | undefined
   contacts: ResultContacts
-  portals: ResultEvents
+  events: ResultEvents
   chat: Chat | null
   userUid: string
   sendMessage: Dispatch<SendMessage>
   getScraperMetaData: Dispatch<any>
   resultSearchChat: ResultChats | undefined
+  theme: ThemeChat
 }
 
 interface Context extends StateProps {
@@ -34,18 +35,19 @@ const InitialValues: Context = {
   topBarSizeY: 0,
   SectionChatBoxX: 0,
   SectionChatShow: false,
-  SectionInfoX: 260,
+  SectionInfoX: 360,
   SectionInfoShow: false,
   activeSearch: false,
   dispatch: () => { },
   chats: undefined,
   contacts: { results: [], total: 0 },
-  portals: { results: [], total: 0 },
+  events: { results: [], total: 0 },
   chat: null,
   userUid: "",
   sendMessage: () => { },
   getScraperMetaData: () => { },
-  resultSearchChat: undefined
+  resultSearchChat: undefined,
+  theme: { baseColor: "", primaryColor: "", secondaryColor: "", tertiaryColor: "" }
 }
 
 export enum typeSetChatContext {
@@ -61,12 +63,13 @@ export enum typeSetChatContext {
   activeSearch = "activeSearch",
   chats = "chats",
   contacts = "contacts",
-  portals = "portals",
+  events = "events",
   chat = "chat",
   userUid = "userUid",
   sendMessage = "sendMessage",
   resultSearchChat = "resultSearchChat",
-  getScraperMetaData = "getScraperMetaData"
+  getScraperMetaData = "getScraperMetaData",
+  theme = "theme"
 }
 
 interface typeDispatch {

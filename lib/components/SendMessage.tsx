@@ -22,11 +22,8 @@ export const SendMessage: FC<propsSendMessage> = () => {
 
   const refInput = useRef<any>(null)
   const fetch = async (url: string) => {
-    console.log("haciendo fetch")
     const resp: any = await getScraperMetaData(url)
-    console.log("resp", resp)
     setMessage((old: any) => {
-      console.log(old)
       return { ...old, ...resp }
     })
   }
