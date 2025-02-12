@@ -40,18 +40,24 @@ export interface Chat {
   _id: string
   addedes: Addedes[]
   messages: MessageChat[]
-  createdAt: number
-  updatedAt: number
+  createdAt?: number
+  updatedAt?: number
   onLine: OnLine
   title: string
   type: string
   photoURL: string
 }
+interface propsValue {
+  uid: string
+  title: string
+  photoURL: string
+  onLine: OnLine
+}
 
 export interface Addedes {
   userUid: string
   type: string
-  online: boolean
+  //  online: boolean
 }
 export interface MessageChat {
   type?: string

@@ -38,8 +38,10 @@ export const SectionSwiper: FC<sectionSwiperProps> = () => {
   const { contentWidth, SectionChatShow, dispatch, chats, contacts, events, activeSearch, theme } = useContext(StateChatContext);
   const [page, setPage] = useState(0)
   const [title, setTitle] = useState<string>("Chats")
-  const [chatId, setChatId] = useState(null)
-  const [contactUid, setContactUid] = useState(null)
+  const [chatId, setChatId] = useState()
+  const [contactUid, setContactUid] = useState()
+  const [filterEvent, setFilterEvent] = useState<string | undefined>()
+
   const handleChatShow = () => {
     dispatch({ set: typeSetChatContext.SectionChatShow, value: true })
   }
@@ -88,13 +90,13 @@ export const SectionSwiper: FC<sectionSwiperProps> = () => {
             >
               <SlideTo page={page} setPage={setPage} />
               <SwiperSlide className="asd-pb-3 asd-h-full" onScroll={() => { }}>
-                <SectionChats />
+                <SectionChats filterEvent={filterEvent} setFilterEvent={setFilterEvent} />
               </SwiperSlide>
               {contacts?.total && contacts?.total > 0 && <SwiperSlide className="asd-pb-3 asd-h-full">
-                <SectionContacs setPage={setPage} />
+                <SectionContacs setPage={setPage} filterEvent={filterEvent} setFilterEvent={setFilterEvent} />
               </SwiperSlide>}
               {events?.total && events?.total > 0 && <SwiperSlide className="asd-pb-3 asd-h-full">
-                <SectionEvents />
+                <SectionEvents setPage={setPage} filterEvent={filterEvent} setFilterEvent={setFilterEvent} />
               </SwiperSlide>}
             </Swiper>
           </div>

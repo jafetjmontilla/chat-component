@@ -1,8 +1,14 @@
-import React, { FC, ReactNode, useContext, useEffect, useState } from "react";
+import React, { Dispatch, FC, ReactNode, useContext, useEffect, useState } from "react";
 import { StateChatContext } from "../context";
 
-export const ContainerSwiper: FC<{ children: ReactNode }> = ({ children }) => {
-  const { contentWidth } = useContext(StateChatContext);
+interface props {
+  filterEvent: string | undefined
+  setFilterEvent: Dispatch<string | undefined>
+  children: ReactNode
+}
+
+export const ContainerSwiper: FC<props> = ({ filterEvent, setFilterEvent, children }) => {
+  const { contentWidth, events } = useContext(StateChatContext);
   const [hover, setHover] = useState<boolean>()
 
   return (

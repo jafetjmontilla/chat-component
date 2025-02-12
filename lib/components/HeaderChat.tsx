@@ -2,7 +2,7 @@ import React, { FC, useContext } from "react";
 import { StateChatContext, typeSetChatContext } from "../context";
 import { ArrowLeft } from "../icons";
 import { getRelativeTime } from "../Util/FormatTime";
-import { Contact } from "./Contact";
+import { ContactComponent } from "./ContactComponent";
 import { ContainerIcon } from "./ContainerIcon";
 
 export const HeaderChat: FC = () => {
@@ -20,7 +20,7 @@ export const HeaderChat: FC = () => {
           <ArrowLeft className="asd-w-6 asd-h-6" />
         </ContainerIcon >
       }
-      <Contact
+      <ContactComponent
         key={chat?._id}
         _id={chat?._id ? chat?._id : ""}
         info={

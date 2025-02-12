@@ -1,25 +1,50 @@
-import React, { Dispatch, FC, useContext } from "react";
+import React, { Dispatch, FC, useContext, useEffect } from "react";
 import { StateChatContext, typeSetChatContext } from "../context/ChatContext";
-import { Chat, OnLine } from "./App.types";
-import { Contact } from "./Contact";
+import { Chat, OnLine, ResultChats } from "./App.types";
+import { ContactComponent } from "./ContactComponent";
 import { ContainerSwiper } from "./ContainerSwiper";
 
 interface props {
   setPage: Dispatch<number>
+  filterEvent: string | undefined
+  setFilterEvent: Dispatch<string | undefined>
 }
 
-export const SectionContacs: FC<props> = ({ setPage }) => {
-  const { contacts, chats, dispatch } = useContext(StateChatContext);
+export const SectionContacs: FC<props> = ({ setPage, filterEvent, setFilterEvent }) => {
+  const { contacts, chats, dispatch, events } = useContext(StateChatContext);
+
   interface propsValue {
     uid: string
     title: string
     photoURL: string
     onLine: OnLine
   }
-  const handle = (value: propsValue) => {
-    const chatFilter = chats?.results?.filter((elem: any) => elem?.title == value?.title)[0]
+  const handleClick = (value: propsValue) => {
+    const chatFilter = chats?.results?.filter((elem: Chat) => elem?.title == value?.title)[0]
     if (chatFilter) {
       dispatch({ set: typeSetChatContext.chat, value: chatFilter })
+    } else {
+      const newChat: Chat = {
+        title: value.title,
+        onLine: value.onLine,
+        type: "chatevents",
+        addedes: [
+          {
+            userUid: value.uid,
+            type: "participante",
+          }
+        ],
+        messages: [],
+        photoURL: value.photoURL,
+        _id: ""
+      }
+      dispatch({ set: typeSetChatContext.chat, value: newChat })
+      const newChats: ResultChats = {
+        received: new Date().getTime(),
+        results: [newChat, ...chats?.results ?? []],
+        total: chats?.total ? chats.total : 0
+      }
+      dispatch({ set: typeSetChatContext.chats, value: newChats })
     }
     dispatch({ set: typeSetChatContext.SectionChatShow, value: true })
     setPage(0)
@@ -27,10 +52,16 @@ export const SectionContacs: FC<props> = ({ setPage }) => {
 
   return (
     <>
-      <ContainerSwiper>
-        {contacts?.results?.map((elem: any, idx: number) => {
+      {!!filterEvent && <div className="asd-flex asd-pl-4 asd-pt-2 asd-relative">
+        <span className="asd-text-[10px] asd-translate-y-[2px]">
+          Evento: {events.results.find(elem => elem._id === filterEvent)?.nombre}
+        </span>
+        <span onClick={() => setFilterEvent(undefined)} className="asd-absolute asd-right-4 -asd-translate-y-[2px] asd-cursor-pointer">x</span>
+      </div>}
+      <ContainerSwiper filterEvent={filterEvent} setFilterEvent={setFilterEvent}>
+        {contacts?.results?.filter(elem => elem.eventos?.find(el => filterEvent ? el._id === filterEvent && elem : elem))?.map((elem, idx: number) => {
           return (
-            <Contact
+            <ContactComponent
               key={idx}
               _id={elem?._id}
               info={
@@ -44,7 +75,7 @@ export const SectionContacs: FC<props> = ({ setPage }) => {
               name={elem?.nickName}
               //HandleContacts({ setPage, setActive, setContactUid, setChatId, item })
               onClick={() => {
-                handle({
+                handleClick({
                   title: elem?.nickName,
                   onLine: elem?.onLine,
                   photoURL: elem?.photoURL,

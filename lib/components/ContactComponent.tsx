@@ -1,8 +1,8 @@
-import React, { FC, MouseEventHandler, ReactNode, useEffect } from "react";
+import React, { FC, MouseEventHandler, ReactNode } from "react";
 import { Item } from './Item'
 
 
-interface propsContact {
+interface props {
   image: string
   name: string
   info: string | ReactNode
@@ -10,7 +10,7 @@ interface propsContact {
   onClick: MouseEventHandler
   onLine?: boolean
 }
-export const Contact: FC<propsContact> = ({ image, onClick, name, info, _id, onLine }) => {
+export const ContactComponent: FC<props> = ({ image, onClick, name, info, _id, onLine }) => {
   return (
     <>
       <div className="asd-w-full asd-gap-10 asd-pl-3"   >

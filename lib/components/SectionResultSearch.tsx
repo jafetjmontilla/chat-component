@@ -1,7 +1,7 @@
 import React, { FC, useContext, useEffect, useState } from "react";
 import { StateChatContext, typeSetChatContext } from "../context/ChatContext";
 import { Chat } from "./App.types";
-import { Contact } from "./Contact";
+import { ContactComponent } from "./ContactComponent";
 
 export const SectionResultSearch: FC = () => {
   const { contentWidth, resultSearchChat, dispatch } = useContext(StateChatContext);
@@ -33,7 +33,7 @@ export const SectionResultSearch: FC = () => {
         <span>{`Encontrados: ${resultSearchChat?.total ? `${resultSearchChat?.total} chats` : ""}`}</span>
         {resultSearchChat?.results?.map((elem: Chat, idx: number) => {
           return (
-            <Contact
+            <ContactComponent
               key={idx}
               _id={elem?._id}
               info={elem?.messages[elem?.messages?.length - 1].message}
